@@ -1,0 +1,44 @@
+{
+  "Interviewers": [
+    {
+      "Name": "Sumit",
+      "interviewerEmail": "vinod.patil@wonderbiz.in",
+      "ZoomUrl": "https://us04web.zoom.us/j/74590648427?pwd=cWhHTHY2MlZpQXlxYXRhUHJTS0VuZz09",
+      "MeettingId": "745 9064 8427",
+      "PassCode": "067981",
+      "InterViewerColorCode": "1"
+    },
+    {
+      "Name": "Vinod",
+      "interviewerEmail": "vinod.patil@wonderbiz.in",
+      "ZoomUrl": "https://us04web.zoom.us/j/74590648427?pwd=cWhHTHY2MlZpQXlxYXRhUHJTS0VuZz09",
+      "MeettingId": "745 9064 8427",
+      "PassCode": "067980",
+      "InterViewerColorCode": "2"
+    },
+    {
+      "Name": "Anzar",
+      "interviewerEmail": "anzar.ansari@wonderbiz.in",
+      "ZoomUrl": "https://us04web.zoom.us/j/74590648427?pwd=cWhHTHY2MlZpQXlxYXRhUHJTS0VuZz09",
+      "MeettingId": "745 9064 8427",
+      "PassCode": "067980",
+      "InterViewerColorCode": "3"
+    },
+    {
+      "Name": "Shaheem",
+      "interviewerEmail": "shaheem.shaikh@wonderbiz.in",
+      "ZoomUrl": "https://us04web.zoom.us/j/74590648427?pwd=cWhHTHY2MlZpQXlxYXRhUHJTS0VuZz09",
+      "MeettingId": "745 9064 8427",
+      "PassCode": "067980",
+      "InterViewerColorCode": "4"
+    },
+    {
+      "Name": "Sahil Ahmed",
+      "interviewerEmail": "i.sahil14@gmail.com",
+      "ZoomUrl": "https://us04web.zoom.us/j/74590648427?pwd=cWhHTHY2MlZpQXlxYXRhUHJTS0VuZz09",
+      "MeettingId": "745 9064 8427",
+      "PassCode": "067980",
+      "InterViewerColorCode": "5"
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "Schedulers": [
+    {
+      "Id": 1,
+      "Name": "Shubham yogi",
+      "Email": "shubham.yogi@wonderbiz.in",
+      "ColorCode": "3"
+    },
+    {
+      "Id": 2,
+      "Name": "Suhas Chougule",
+      "Email": "Suhas.choughle@wonderbiz.in",
+      "ColorCode": "3"
+    },
+    {
+      "Id": 3,
+      "Name": "Yash Sonparote",
+      "Email": "Yash.son@wonderbiz.in",
+      "ColorCode": "1"
+    },
+    {
+      "Id": 4,
+      "Name": "Bankai fvfvef",
+      "Email": "bankai@juee.in",
+      "ColorCode": "2"
+    },
+    {
+      "Id": 5,
+      "Name": "hbebbwe",
+      "Email": "wjebceuwbu@jbcje.com",
+      "ColorCode": "Yellow"
+    }
+  ]
+}
