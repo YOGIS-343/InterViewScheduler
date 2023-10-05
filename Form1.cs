@@ -603,7 +603,8 @@ namespace InterViewScheduler
 
         private void addInterToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            InterviewerAdd interviewerAdd = new InterviewerAdd();
+            interviewerAdd.ShowDialog();
         }
 
         private void addRecruterToolStripMenuItem_Click(object sender, EventArgs e)
