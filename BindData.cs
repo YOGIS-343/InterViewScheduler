@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Linq;
 using System.Text;
@@ -48,9 +49,12 @@ namespace InterViewScheduler
     public class InterviewerLoops
     {
         public Interviewers[]? Interviewers { get; set; }
+
+      
     }
     public class Interviewers
     {
+        public int? Id { get; set; }
         public string? Name { get; set; }
         public string? interviewerEmail { get; set; }
         public string? ZoomUrl { get; set; }
@@ -67,10 +71,10 @@ namespace InterViewScheduler
 
     public class Schedulers
     {
-      public int? Id { get; set; }
+        public int? Id { get; set; }
         public string? Name { get; set; }
         public string Email { get; set; }
-
+      
         public override string ToString() => Name;
         public string ColorCode { get; set; }
     }
@@ -88,7 +92,7 @@ namespace InterViewScheduler
         public string? InterViewerDescription { get; set; }
         public override string ToString() => Id;
     }
-   
+
     public class Wrapper
     {
         [JsonProperty("Schedulers")]
