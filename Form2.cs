@@ -31,7 +31,7 @@ namespace InterViewScheduler
             InitializeComponent();
             //Filepath = "C:\\Users\\ShubhamY\\InterViewScheduler-Source2.020230928101432\\InterViewScheduler-Source2.0\\InterViewScheduler\\bin\\Debug\\net6.0-windows\\Data\\ScheduleBy.json";
             // Filepath = "C:\\Users\\ShubhamY\\InterViewScheduler-Source2.020230928101432\\InterViewScheduler-Source2.0\\InterViewScheduler\\bin\\Debug\\net6.0-windows\\Data\\schedule.json";
-            Filepath = "C:\\Users\\ShubhamY\\InterViewScheduler-Source2.020230928101432\\InterViewScheduler-Source2.0\\InterViewScheduler\\Data\\ScheduleBy.json";
+            Filepath = "C:\\Users\\ShubhamY\\Source\\GitRepos\\InterViewScheduler\\Data\\ScheduleBy.json";
             colorPicker2.DrawItem += (sender, e) => OnDrawItem(sender, e);
             colorPicker2.Items.AddRange(CreateColorCodeList().ToArray());
             schedulers = ReadJsonFile();
@@ -39,12 +39,12 @@ namespace InterViewScheduler
 
         private List<Combobox_Item> CreateColorCodeList()
         {
-            combobox_Items.Add(new Combobox_Item("Red", new Bitmap(@"C:\Users\ShubhamY\Pictures\Saved Pictures\Red.jpg"), "1"));
-            combobox_Items.Add(new Combobox_Item("Black", new Bitmap(@"C:\Users\ShubhamY\Pictures\Saved Pictures\Black.jpg"), "2"));
-            combobox_Items.Add(new Combobox_Item("Yellow", new Bitmap(@"C:\Users\ShubhamY\Pictures\Saved Pictures\Yellow.jpg"), "3"));
-            combobox_Items.Add(new Combobox_Item("Green", new Bitmap(@"C:\Users\ShubhamY\Pictures\Saved Pictures\green.png"), "4"));
-            combobox_Items.Add(new Combobox_Item("Brown", new Bitmap(@"C:\Users\ShubhamY\Pictures\Saved Pictures\Brown.jpg"), "5"));
-            combobox_Items.Add(new Combobox_Item("Purple", new Bitmap(@"C:\Users\ShubhamY\Pictures\Saved Pictures\Purple.jpg"), "6"));
+            combobox_Items.Add(new Combobox_Item("Red", new Bitmap("Colorcode\\Red.jpg"), "1"));
+            combobox_Items.Add(new Combobox_Item("Black", new Bitmap("Colorcode\\Black.jpg"), "2"));
+            combobox_Items.Add(new Combobox_Item("Yellow", new Bitmap("Colorcode\\Yellow.jpg"), "3"));
+            combobox_Items.Add(new Combobox_Item("Green", new Bitmap("Colorcode\\green.png"), "4"));
+            combobox_Items.Add(new Combobox_Item("Brown", new Bitmap("Colorcode\\Brown.jpg"), "5"));
+            combobox_Items.Add(new Combobox_Item("Purple", new Bitmap("Colorcode\\Purple.jpg"), "6"));
 
             return combobox_Items;
         }
@@ -199,7 +199,7 @@ namespace InterViewScheduler
                 RecordId.Text = row.Cells[0].Value.ToString();
                 textBox1.Text = row.Cells[1].Value.ToString();
                 textBox2.Text = row.Cells[2].Value.ToString();
-               // colorPicker2. = row.Cells[3].Value.ToString();
+                // colorPicker2. = row.Cells[3].Value.ToString();
                 colorPicker2.SelectedItem = combobox_Items.FirstOrDefault(x => x.ColorRGB == row.Cells[3].Value.ToString());
                 //textBox3.Text = row.Cells[2].Value.ToString();
             }
@@ -221,6 +221,22 @@ namespace InterViewScheduler
         private void colorPicker2_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((sender as TextBox).SelectionStart == 0)
+                e.Handled = (e.KeyChar == (char)Keys.Space);
+            else
+                e.Handled = false;
+        }
+
+        private void textBox2_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((sender as TextBox).SelectionStart == 0)
+                e.Handled = (e.KeyChar == (char)Keys.Space);
+            else
+                e.Handled = false;
         }
     }
 }

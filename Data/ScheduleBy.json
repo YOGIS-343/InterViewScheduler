@@ -10,7 +10,7 @@
       "Id": 2,
       "Name": "Suhas Chougule",
       "Email": "Suhas.choughle@wonderbiz.in",
-      "ColorCode": "3"
+      "ColorCode": "2"
     },
     {
       "Id": 3,
@@ -28,7 +28,13 @@
       "Id": 5,
       "Name": "hbebbwe",
       "Email": "wjebceuwbu@jbcje.com",
-      "ColorCode": "Yellow"
+      "ColorCode": "2"
+    },
+    {
+      "Id": 6,
+      "Name": "abcd",
+      "Email": "vfrbbrgb@gmail.com",
+      "ColorCode": "3"
     }
   ]
 }
