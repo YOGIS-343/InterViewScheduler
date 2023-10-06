@@ -42,6 +42,7 @@
             dataGridView1 = new DataGridView();
             colorPicker2 = new ColorPicker();
             RecordId = new Label();
+            button3 = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -121,9 +122,9 @@
             // 
             // button1
             // 
-            button1.Location = new Point(381, 185);
+            button1.Location = new Point(251, 178);
             button1.Name = "button1";
-            button1.Size = new Size(123, 36);
+            button1.Size = new Size(123, 35);
             button1.TabIndex = 7;
             button1.Text = "Save";
             button1.UseVisualStyleBackColor = true;
@@ -165,11 +166,22 @@
             RecordId.TabIndex = 11;
             RecordId.Visible = false;
             // 
+            // button3
+            // 
+            button3.Location = new Point(380, 178);
+            button3.Name = "button3";
+            button3.Size = new Size(123, 35);
+            button3.TabIndex = 12;
+            button3.Text = "Delete";
+            button3.UseVisualStyleBackColor = true;
+            button3.Click += button3_Click;
+            // 
             // Form2
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(559, 451);
+            Controls.Add(button3);
             Controls.Add(RecordId);
             Controls.Add(colorPicker2);
             Controls.Add(dataGridView1);
@@ -181,6 +193,7 @@
             Controls.Add(label2);
             Controls.Add(label1);
             Icon = (Icon)resources.GetObject("$this.Icon");
+            MaximizeBox = false;
             Name = "Form2";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Interview Scheduler - Recruter Details";
@@ -207,5 +220,6 @@
         private ColorPicker colorPicker2;
         private Button button2;
         private Label RecordId;
+        private Button button3;
     }
 }

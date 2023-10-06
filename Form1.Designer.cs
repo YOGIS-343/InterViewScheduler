@@ -551,14 +551,14 @@
             // addRecToolStripMenuItem
             // 
             addRecToolStripMenuItem.Name = "addRecToolStripMenuItem";
-            addRecToolStripMenuItem.Size = new Size(224, 26);
+            addRecToolStripMenuItem.Size = new Size(197, 26);
             addRecToolStripMenuItem.Text = "Add Recruter";
             addRecToolStripMenuItem.Click += addRecToolStripMenuItem_Click;
             // 
             // addInterToolStripMenuItem
             // 
             addInterToolStripMenuItem.Name = "addInterToolStripMenuItem";
-            addInterToolStripMenuItem.Size = new Size(224, 26);
+            addInterToolStripMenuItem.Size = new Size(197, 26);
             addInterToolStripMenuItem.Text = "Add Interviewer";
             addInterToolStripMenuItem.Click += addInterToolStripMenuItem_Click;
             // 

@@ -28,7 +28,7 @@ namespace InterViewScheduler
         public InterviewerAdd()
         {
             InitializeComponent();
-            filePath = "C:\\Users\\ShubhamY\\Source\\GitRepos\\InterViewScheduler\\Data\\Interviewer.json";
+            filePath = "Data\\Interviewer.json";
             loopslist = new List<Interviewers>();
             colorPicker1.DrawItem += (sender, e) => OnDrawItem(sender, e);
             colorPicker1.Items.AddRange(CreateColorCodeList().ToArray());
@@ -175,6 +175,8 @@ namespace InterViewScheduler
 
             var table = dataSet.Tables[0];
             dataGridView1.DataSource = table;
+            dataGridView1.Columns[0].Visible = false;
+
         }
 
         public bool Isvalidemail(string email)
@@ -243,7 +245,38 @@ namespace InterViewScheduler
                 e.Handled = false;
         }
 
-       
+        private void Delete_button_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (File.Exists(filePath))
+                {
+                    int Id = Convert.ToInt32(RecordId.Text == "" ? interviewers.Count() + 1 : RecordId.Text);
+                    var found = interviewers.FirstOrDefault(c => c.Id == Id);
+                    if (found != null)
+                    {
+
+                        interviewers.Remove(found);
+
+                        WriteJsonFile(interviewers);
+
+                        string Rjson = File.ReadAllText(filePath);
+
+
+                        var table = JsonConvert.DeserializeObject<DataSet>(Rjson).Tables[0];
+                        dataGridView1.DataSource = table;
+
+
+                    }
+
+                }
+
+            }
+            catch (Exception)
+            {
+                throw new ArgumentException("User has not deleted");
+            }
+        }
     }
 
 
