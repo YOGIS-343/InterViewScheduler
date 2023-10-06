@@ -5,7 +5,9 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Text.Json.Nodes;
 using System.Text.RegularExpressions;
@@ -26,7 +28,7 @@ namespace InterViewScheduler
         public InterviewerAdd()
         {
             InitializeComponent();
-            filePath = "C:\\Users\\ShubhamY\\InterViewScheduler-Source2.020230928101432\\InterViewScheduler-Source2.0\\InterViewScheduler\\Data\\Interviewer.json";
+            filePath = "C:\\Users\\ShubhamY\\Source\\GitRepos\\InterViewScheduler\\Data\\Interviewer.json";
             loopslist = new List<Interviewers>();
             colorPicker1.DrawItem += (sender, e) => OnDrawItem(sender, e);
             colorPicker1.Items.AddRange(CreateColorCodeList().ToArray());
@@ -35,12 +37,12 @@ namespace InterViewScheduler
         }
         private List<Combobox_Item> CreateColorCodeList()
         {
-            dropDownItems.Add(new Combobox_Item("Red", new Bitmap(@"C:\Users\ShubhamY\Pictures\Saved Pictures\Red.jpg"), "1"));
-            dropDownItems.Add(new Combobox_Item("Black", new Bitmap(@"C:\Users\ShubhamY\Pictures\Saved Pictures\Black.jpg"), "2"));
-            dropDownItems.Add(new Combobox_Item("Yellow", new Bitmap(@"C:\Users\ShubhamY\Pictures\Saved Pictures\Yellow.jpg"), "3"));
-            dropDownItems.Add(new Combobox_Item("Green", new Bitmap(@"C:\Users\ShubhamY\Pictures\Saved Pictures\green.png"), "4"));
-            dropDownItems.Add(new Combobox_Item("Brown", new Bitmap(@"C:\Users\ShubhamY\Pictures\Saved Pictures\Brown.jpg"), "5"));
-            dropDownItems.Add(new Combobox_Item("Purple", new Bitmap(@"C:\Users\ShubhamY\Pictures\Saved Pictures\Purple.jpg"), "6"));
+            dropDownItems.Add(new Combobox_Item("Red", new Bitmap("Colorcode\\Red.jpg"), "1"));
+            dropDownItems.Add(new Combobox_Item("Black", new Bitmap("Colorcode\\Black.jpg"), "2"));
+            dropDownItems.Add(new Combobox_Item("Yellow", new Bitmap("Colorcode\\Yellow.jpg"), "3"));
+            dropDownItems.Add(new Combobox_Item("Green", new Bitmap("Colorcode\\green.png"), "4"));
+            dropDownItems.Add(new Combobox_Item("Brown", new Bitmap("Colorcode\\Brown.jpg"), "5"));
+            dropDownItems.Add(new Combobox_Item("Purple", new Bitmap("Colorcode\\Purple.jpg"), "6"));
             return dropDownItems;
         }
 
@@ -205,7 +207,43 @@ namespace InterViewScheduler
                 MessageBox.Show("No Record Found");
 
             }
+
+
         }
+
+        private void txtName_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((sender as System.Windows.Forms.TextBox).SelectionStart == 0)
+                e.Handled = (e.KeyChar == (char)Keys.Space);
+            else
+                e.Handled = false;
+        }
+
+        private void txtInterviewerEmail_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((sender as System.Windows.Forms.TextBox).SelectionStart == 0)
+                e.Handled = (e.KeyChar == (char)Keys.Space);
+            else
+                e.Handled = false;
+        }
+
+        private void txtZoomURL_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((sender as System.Windows.Forms.TextBox).SelectionStart == 0)
+                e.Handled = (e.KeyChar == (char)Keys.Space);
+            else
+                e.Handled = false;
+        }
+
+        private void txtMeetingId_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((sender as System.Windows.Forms.TextBox).SelectionStart == 0)
+                e.Handled = (e.KeyChar == (char)Keys.Space);
+            else
+                e.Handled = false;
+        }
+
+       
     }
 
 
