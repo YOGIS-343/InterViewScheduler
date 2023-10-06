@@ -109,7 +109,7 @@
             // 
             // btnSave
             // 
-            btnSave.Location = new Point(649, 247);
+            btnSave.Location = new Point(649, 253);
             btnSave.Name = "btnSave";
             btnSave.Size = new Size(94, 29);
             btnSave.TabIndex = 33;
@@ -123,6 +123,7 @@
             txtPasscode.Name = "txtPasscode";
             txtPasscode.Size = new Size(424, 27);
             txtPasscode.TabIndex = 31;
+          
             // 
             // txtMeetingId
             // 
@@ -130,6 +131,7 @@
             txtMeetingId.Name = "txtMeetingId";
             txtMeetingId.Size = new Size(424, 27);
             txtMeetingId.TabIndex = 30;
+            txtMeetingId.KeyPress += txtMeetingId_KeyPress;
             // 
             // txtZoomURL
             // 
@@ -137,6 +139,7 @@
             txtZoomURL.Name = "txtZoomURL";
             txtZoomURL.Size = new Size(424, 27);
             txtZoomURL.TabIndex = 29;
+            txtZoomURL.KeyPress += txtZoomURL_KeyPress;
             // 
             // txtInterviewerEmail
             // 
@@ -144,6 +147,7 @@
             txtInterviewerEmail.Name = "txtInterviewerEmail";
             txtInterviewerEmail.Size = new Size(424, 27);
             txtInterviewerEmail.TabIndex = 28;
+            txtInterviewerEmail.KeyPress += txtInterviewerEmail_KeyPress;
             // 
             // txtName
             // 
@@ -151,6 +155,7 @@
             txtName.Name = "txtName";
             txtName.Size = new Size(424, 27);
             txtName.TabIndex = 27;
+            txtName.KeyPress += txtName_KeyPress;
             // 
             // label5
             // 
@@ -214,12 +219,12 @@
             dataGridView1.AllowUserToResizeRows = false;
             dataGridView1.BorderStyle = BorderStyle.Fixed3D;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(2, 319);
+            dataGridView1.Location = new Point(2, 311);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.ReadOnly = true;
             dataGridView1.RowHeadersWidth = 51;
             dataGridView1.RowTemplate.Height = 29;
-            dataGridView1.Size = new Size(788, 193);
+            dataGridView1.Size = new Size(788, 208);
             dataGridView1.TabIndex = 24;
             dataGridView1.CellClick += dataGridView1_CellClick;
             // 

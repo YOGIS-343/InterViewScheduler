@@ -109,6 +109,7 @@
             textBox1.Name = "textBox1";
             textBox1.Size = new Size(390, 27);
             textBox1.TabIndex = 4;
+            textBox1.KeyPress += textBox1_KeyPress;
             // 
             // textBox2
             // 
@@ -116,6 +117,7 @@
             textBox2.Name = "textBox2";
             textBox2.Size = new Size(390, 27);
             textBox2.TabIndex = 5;
+            textBox2.KeyPress += textBox2_KeyPress;
             // 
             // button1
             // 
