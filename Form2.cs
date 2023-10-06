@@ -8,6 +8,7 @@ using System.Data;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Text.Json.Nodes;
 using System.Text.RegularExpressions;
@@ -31,7 +32,7 @@ namespace InterViewScheduler
             InitializeComponent();
             //Filepath = "C:\\Users\\ShubhamY\\InterViewScheduler-Source2.020230928101432\\InterViewScheduler-Source2.0\\InterViewScheduler\\bin\\Debug\\net6.0-windows\\Data\\ScheduleBy.json";
             // Filepath = "C:\\Users\\ShubhamY\\InterViewScheduler-Source2.020230928101432\\InterViewScheduler-Source2.0\\InterViewScheduler\\bin\\Debug\\net6.0-windows\\Data\\schedule.json";
-            Filepath = "C:\\Users\\ShubhamY\\Source\\GitRepos\\InterViewScheduler\\Data\\ScheduleBy.json";
+            Filepath = "Data\\ScheduleBy.json";
             colorPicker2.DrawItem += (sender, e) => OnDrawItem(sender, e);
             colorPicker2.Items.AddRange(CreateColorCodeList().ToArray());
             schedulers = ReadJsonFile();
@@ -140,7 +141,6 @@ namespace InterViewScheduler
             }
         }
 
-
         private void Form2_Load_1(object sender, EventArgs e)
         {
             string Rjson = File.ReadAllText(Filepath);
@@ -149,6 +149,10 @@ namespace InterViewScheduler
 
             var table = dataSet.Tables[0];
             dataGridView1.DataSource = table;
+            dataGridView1.Columns[0].Visible = false;
+            dataGridView1.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dataGridView1.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dataGridView1.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
         }
 
@@ -237,6 +241,39 @@ namespace InterViewScheduler
                 e.Handled = (e.KeyChar == (char)Keys.Space);
             else
                 e.Handled = false;
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (File.Exists(Filepath))
+                {
+                    int Id = Convert.ToInt32(RecordId.Text == "" ? schedulers.Count() + 1 : RecordId.Text);
+                    var found = schedulers.FirstOrDefault(c => c.Id == Id);
+                    if (found != null)
+                    {
+
+                        schedulers.Remove(found);
+
+                        WriteJsonFile(schedulers);
+
+                        string Rjson = File.ReadAllText(Filepath);
+
+
+                        var table = JsonConvert.DeserializeObject<DataSet>(Rjson).Tables[0];
+                        dataGridView1.DataSource = table;
+
+
+                    }
+
+                }
+
+            }
+            catch (Exception)
+            {
+                throw new ArgumentException("User has not deleted");
+            }
         }
     }
 }

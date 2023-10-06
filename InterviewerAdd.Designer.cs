@@ -32,6 +32,7 @@
             dropDownItem1 = new ColorPicker();
             dropDownItem2 = new ColorPicker();
             groupBox1 = new GroupBox();
+            Delete_button = new Button();
             RecordId = new Label();
             colorPicker1 = new ColorPicker();
             btnSave = new Button();
@@ -67,6 +68,7 @@
             // 
             // groupBox1
             // 
+            groupBox1.Controls.Add(Delete_button);
             groupBox1.Controls.Add(RecordId);
             groupBox1.Controls.Add(colorPicker1);
             groupBox1.Controls.Add(btnSave);
@@ -87,6 +89,16 @@
             groupBox1.TabIndex = 23;
             groupBox1.TabStop = false;
             groupBox1.Text = "Interviewer Details";
+            // 
+            // Delete_button
+            // 
+            Delete_button.Location = new Point(649, 253);
+            Delete_button.Name = "Delete_button";
+            Delete_button.Size = new Size(94, 29);
+            Delete_button.TabIndex = 37;
+            Delete_button.Text = "Delete";
+            Delete_button.UseVisualStyleBackColor = true;
+            Delete_button.Click += Delete_button_Click;
             // 
             // RecordId
             // 
@@ -109,7 +121,7 @@
             // 
             // btnSave
             // 
-            btnSave.Location = new Point(649, 253);
+            btnSave.Location = new Point(533, 253);
             btnSave.Name = "btnSave";
             btnSave.Size = new Size(94, 29);
             btnSave.TabIndex = 33;
@@ -123,7 +135,6 @@
             txtPasscode.Name = "txtPasscode";
             txtPasscode.Size = new Size(424, 27);
             txtPasscode.TabIndex = 31;
-          
             // 
             // txtMeetingId
             // 
@@ -169,7 +180,7 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(28, 176);
+            label4.Location = new Point(6, 213);
             label4.Name = "label4";
             label4.Size = new Size(86, 20);
             label4.TabIndex = 25;
@@ -236,6 +247,7 @@
             Controls.Add(dataGridView1);
             Controls.Add(groupBox1);
             Icon = (Icon)resources.GetObject("$this.Icon");
+            MaximizeBox = false;
             MaximumSize = new Size(810, 571);
             Name = "InterviewerAdd";
             StartPosition = FormStartPosition.CenterScreen;
@@ -267,5 +279,6 @@
         private ColorPicker dropDownItem1;
         private ColorPicker dropDownItem2;
         private Label RecordId;
+        private Button Delete_button;
     }
 }
