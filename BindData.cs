@@ -104,5 +104,10 @@ namespace InterViewScheduler
     {
         public List<Schedulers> Schedulers { get; set; }
     }
+    public class User
+    {
+        public string Username { get; set; }
+        public string Password { get; set; }
+    }
 }
 
