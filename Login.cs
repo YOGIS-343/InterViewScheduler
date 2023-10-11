@@ -30,20 +30,20 @@ namespace InterViewScheduler
 
             if (Role == "Recruiter")
             {
-                List<User> users = JsonHelper.DeserializeFromFile<User>("users.json");
-                User user = users.Find(u => u.Username == username && u.Password == encodedData);
+            List<User> users = JsonHelper.DeserializeFromFile<User>("users.json");
+            User user = users.Find(u => u.Username == username && u.Password == encodedData);
 
-                if (user != null)
-                {
-                    Form1 frm = new Form1();
-                    frm.ShowDialog();
-                    Close();
-                }
-                else
-                {
-                    MessageBox.Show("Login failed. Invalid credentials.");
-                }
+            if (user != null)
+            {
+                Form1 frm = new Form1();
+                frm.ShowDialog();
+                Close();
             }
+            else
+            {
+                MessageBox.Show("Login failed. Invalid credentials.");
+            }
+        }
             else if (Role == "Admin")
             {
 
@@ -78,9 +78,9 @@ namespace InterViewScheduler
 
             if (user != null)
             {
-                Registration frm = new Registration();
-                frm.ShowDialog();
-            }
+            Registration frm = new Registration();
+            frm.ShowDialog();
+        }
             else
             {
                 MessageBox.Show("failed. Invalid credentials.");
@@ -99,6 +99,8 @@ namespace InterViewScheduler
             else
             {
                 textBox2.UseSystemPasswordChar = true;
+
+
             }
         }
 
