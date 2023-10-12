@@ -37,11 +37,11 @@ namespace InterViewScheduler
             }
             else
             {
-            users.Add(new User { Username = username, Password = encodedData });
-            JsonHelper.SerializeToFile(users, "users.json");
-            MessageBox.Show("Registration successful!");
+                users.Add(new User { Username = username, Password = encodedData });
+                JsonHelper.SerializeToFile(users, "users.json");
+                MessageBox.Show("Registration successful!");
 
-            Close();
+                Close();
             }
         }
         private void RegPassText_KeyUp(object sender, KeyEventArgs e)

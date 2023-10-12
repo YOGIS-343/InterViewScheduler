@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             groupBox1 = new GroupBox();
             txtGoogleMeetUrl = new TextBox();
@@ -76,9 +77,10 @@
             btnSearch = new Button();
             openFileDialog1 = new OpenFileDialog();
             menuStrip1 = new MenuStrip();
-            addRecruterToolStripMenuItem = new ToolStripMenuItem();
+            AdminToolStripMenuItem = new ToolStripMenuItem();
             addRecToolStripMenuItem = new ToolStripMenuItem();
             addInterToolStripMenuItem = new ToolStripMenuItem();
+            contextMenuStrip1 = new ContextMenuStrip(components);
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvCandList).BeginInit();
@@ -133,7 +135,6 @@
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
             groupBox1.Text = "Candidate Details";
-            groupBox1.Enter += groupBox1_Enter;
             // 
             // txtGoogleMeetUrl
             // 
@@ -473,7 +474,6 @@
             txtCondName.Name = "txtCondName";
             txtCondName.Size = new Size(266, 27);
             txtCondName.TabIndex = 2;
-            txtCondName.TextChanged += txtCondName_TextChanged;
             // 
             // label1
             // 
@@ -533,34 +533,39 @@
             // menuStrip1
             // 
             menuStrip1.ImageScalingSize = new Size(20, 20);
-            menuStrip1.Items.AddRange(new ToolStripItem[] { addRecruterToolStripMenuItem });
+            menuStrip1.Items.AddRange(new ToolStripItem[] { AdminToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Size = new Size(1323, 28);
             menuStrip1.TabIndex = 4;
             menuStrip1.Text = "menuStrip1";
             // 
-            // addRecruterToolStripMenuItem
+            // AdminToolStripMenuItem
             // 
-            addRecruterToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { addRecToolStripMenuItem, addInterToolStripMenuItem });
-            addRecruterToolStripMenuItem.Name = "addRecruterToolStripMenuItem";
-            addRecruterToolStripMenuItem.Size = new Size(106, 24);
-            addRecruterToolStripMenuItem.Text = "Admin Panel";
-            addRecruterToolStripMenuItem.Click += addRecruterToolStripMenuItem_Click;
+            AdminToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { addRecToolStripMenuItem, addInterToolStripMenuItem });
+            AdminToolStripMenuItem.Name = "AdminToolStripMenuItem";
+            AdminToolStripMenuItem.Size = new Size(106, 24);
+            AdminToolStripMenuItem.Text = "Admin Panel";
             // 
             // addRecToolStripMenuItem
             // 
             addRecToolStripMenuItem.Name = "addRecToolStripMenuItem";
-            addRecToolStripMenuItem.Size = new Size(224, 26);
+            addRecToolStripMenuItem.Size = new Size(223, 26);
             addRecToolStripMenuItem.Text = "Manage Recruter";
             addRecToolStripMenuItem.Click += addRecToolStripMenuItem_Click;
             // 
             // addInterToolStripMenuItem
             // 
             addInterToolStripMenuItem.Name = "addInterToolStripMenuItem";
-            addInterToolStripMenuItem.Size = new Size(224, 26);
+            addInterToolStripMenuItem.Size = new Size(223, 26);
             addInterToolStripMenuItem.Text = "Manage Interviewer";
             addInterToolStripMenuItem.Click += addInterToolStripMenuItem_Click;
+            // 
+            // contextMenuStrip1
+            // 
+            contextMenuStrip1.ImageScalingSize = new Size(20, 20);
+            contextMenuStrip1.Name = "contextMenuStrip1";
+            contextMenuStrip1.Size = new Size(61, 4);
             // 
             // Form1
             // 
@@ -572,12 +577,12 @@
             Controls.Add(groupBox2);
             Controls.Add(groupBox1);
             Controls.Add(menuStrip1);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             Icon = (Icon)resources.GetObject("$this.Icon");
             MainMenuStrip = menuStrip1;
             Name = "Form1";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Interview Scheduler - WonderBiz@2022";
-            Load += Form1_Load;
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
             groupBox2.ResumeLayout(false);
@@ -637,8 +642,9 @@
         private TextBox txtGoogleMeetUrl;
         private Label lblGoogleMeetUrl;
         private MenuStrip menuStrip1;
-        private ToolStripMenuItem addRecruterToolStripMenuItem;
         private ToolStripMenuItem addRecToolStripMenuItem;
         private ToolStripMenuItem addInterToolStripMenuItem;
+        public ToolStripMenuItem AdminToolStripMenuItem;
+        private ContextMenuStrip contextMenuStrip1;
     }
 }

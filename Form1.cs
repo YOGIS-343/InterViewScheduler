@@ -17,6 +17,7 @@ namespace InterViewScheduler
 {
     public partial class Form1 : Form
     {
+        public static Form1 mdiobj;
         public string ApplicationName = "";
         public MailContaint mailContaint = null;
         public GoogleSheetParameters gsp = null;
@@ -607,24 +608,6 @@ namespace InterViewScheduler
             interviewerAdd.ShowDialog();
         }
 
-        private void addRecruterToolStripMenuItem_Click(object sender, EventArgs e)
-        {
 
-        }
-
-        private void txtCondName_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void groupBox1_Enter(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
-        }
     }
 }

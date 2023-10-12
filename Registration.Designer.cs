@@ -46,7 +46,7 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point);
-            label1.Location = new Point(172, 34);
+            label1.Location = new Point(154, 9);
             label1.Name = "label1";
             label1.Size = new Size(176, 38);
             label1.TabIndex = 1;
@@ -55,7 +55,7 @@
             // BtnRegister
             // 
             BtnRegister.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            BtnRegister.Location = new Point(369, 308);
+            BtnRegister.Location = new Point(375, 217);
             BtnRegister.Name = "BtnRegister";
             BtnRegister.Size = new Size(90, 37);
             BtnRegister.TabIndex = 12;
@@ -65,7 +65,7 @@
             // 
             // RegPassText
             // 
-            RegPassText.Location = new Point(182, 193);
+            RegPassText.Location = new Point(188, 116);
             RegPassText.Name = "RegPassText";
             RegPassText.Size = new Size(277, 27);
             RegPassText.TabIndex = 11;
@@ -74,7 +74,7 @@
             // 
             // RegUsernameText
             // 
-            RegUsernameText.Location = new Point(182, 132);
+            RegUsernameText.Location = new Point(188, 68);
             RegUsernameText.Name = "RegUsernameText";
             RegUsernameText.Size = new Size(277, 27);
             RegUsernameText.TabIndex = 10;
@@ -84,7 +84,7 @@
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point);
-            label3.Location = new Point(71, 192);
+            label3.Location = new Point(12, 118);
             label3.Name = "label3";
             label3.Size = new Size(101, 25);
             label3.TabIndex = 9;
@@ -94,7 +94,7 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point);
-            label2.Location = new Point(71, 131);
+            label2.Location = new Point(12, 70);
             label2.Name = "label2";
             label2.Size = new Size(105, 25);
             label2.TabIndex = 8;
@@ -104,15 +104,15 @@
             // 
             CnfrmPassBtn.AutoSize = true;
             CnfrmPassBtn.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point);
-            CnfrmPassBtn.Location = new Point(5, 251);
+            CnfrmPassBtn.Location = new Point(12, 167);
             CnfrmPassBtn.Name = "CnfrmPassBtn";
-            CnfrmPassBtn.Size = new Size(167, 25);
+            CnfrmPassBtn.Size = new Size(170, 25);
             CnfrmPassBtn.TabIndex = 13;
-            CnfrmPassBtn.Text = "confirm Password  :";
+            CnfrmPassBtn.Text = "Confirm Password  :";
             // 
             // RegCnfrmPassText
             // 
-            RegCnfrmPassText.Location = new Point(182, 252);
+            RegCnfrmPassText.Location = new Point(188, 165);
             RegCnfrmPassText.Name = "RegCnfrmPassText";
             RegCnfrmPassText.Size = new Size(277, 27);
             RegCnfrmPassText.TabIndex = 14;
@@ -122,7 +122,7 @@
             // ShowcheckBox
             // 
             ShowcheckBox.AutoSize = true;
-            ShowcheckBox.Location = new Point(182, 285);
+            ShowcheckBox.Location = new Point(188, 198);
             ShowcheckBox.Name = "ShowcheckBox";
             ShowcheckBox.Size = new Size(67, 24);
             ShowcheckBox.TabIndex = 16;
@@ -138,7 +138,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(516, 417);
+            ClientSize = new Size(498, 293);
             Controls.Add(ShowcheckBox);
             Controls.Add(RegCnfrmPassText);
             Controls.Add(CnfrmPassBtn);
@@ -148,6 +148,9 @@
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(label1);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            MaximizeBox = false;
+            MinimizeBox = false;
             Name = "Registration";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Registration";

@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -12,54 +13,61 @@ namespace InterViewScheduler
 {
     public partial class Login : Form
     {
+        public string Role;
         public Login()
         {
             InitializeComponent();
             BtnRegister.Enabled = false;
-
         }
         private void button1_Click(object sender, EventArgs e)
         {
             string username = textBox1.Text;
-            string password = textBox2.Text;
+            string password = textBox2.Text; 
+            { 
 
-            byte[] encData_byte = new byte[password.Length];
+                byte[] encData_byte = new byte[password.Length];
             encData_byte = System.Text.Encoding.UTF8.GetBytes(password);
             string encodedData = Convert.ToBase64String(encData_byte);
-            string Role = comboBox1.GetItemText(comboBox1.SelectedItem);
+            Role = comboBox1.GetItemText(comboBox1.SelectedItem);
 
-            if (Role == "Recruiter")
-            {
-            List<User> users = JsonHelper.DeserializeFromFile<User>("users.json");
-            User user = users.Find(u => u.Username == username && u.Password == encodedData);
-
-            if (user != null)
-            {
-                Form1 frm = new Form1();
-                frm.ShowDialog();
-                Close();
-            }
-            else
-            {
-                MessageBox.Show("Login failed. Invalid credentials.");
-            }
-        }
-            else if (Role == "Admin")
-            {
-
-                List<User> users = JsonHelper.DeserializeFromFile<User>("Admin.json");
-                User user = users.Find(u => u.Username == username && u.Password == encodedData);
-
-                if (user != null)
+                if (Role == "Recruiter")
                 {
-                    Form1 frm = new Form1();
-                    frm.ShowDialog();
-                    Close();
+                    List<User> users = JsonHelper.DeserializeFromFile<User>("Data\\users.json");
+                    User user = users.Find(u => u.Username == username && u.Password == encodedData);
+
+                    if (user != null)
+                    {
+
+                        Form1 frm = new Form1();
+                        frm.AdminToolStripMenuItem.Enabled = false;
+                        frm.ShowDialog();
+                        Close();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Login failed. Invalid credentials.");
+                    }
                 }
-                else
+                else if (Role == "Admin")
                 {
-                    MessageBox.Show("Login failed. Invalid credentials.");
+
+                    List<User> users = JsonHelper.DeserializeFromFile<User>("Data\\Admin.json");
+                    User user = users.Find(u => u.Username == username && u.Password == encodedData);
+
+                    if (user != null)
+                    {
+
+                        Form1 frm = new Form1();
+                        frm.ShowDialog();
+                        this.Hide();
+                        Close();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Login failed. Invalid credentials.");
+                    }
                 }
+              
             }
         }
 
@@ -73,14 +81,14 @@ namespace InterViewScheduler
             encData_byte = System.Text.Encoding.UTF8.GetBytes(password);
             string encodedData = Convert.ToBase64String(encData_byte);
 
-            List<User> users = JsonHelper.DeserializeFromFile<User>("Admin.json");
+            List<User> users = JsonHelper.DeserializeFromFile<User>("Data\\Admin.json");
             User user = users.Find(u => u.Username == username && u.Password == encodedData);
 
             if (user != null)
             {
-            Registration frm = new Registration();
-            frm.ShowDialog();
-        }
+                Registration frm = new Registration();
+                frm.ShowDialog();
+            }
             else
             {
                 MessageBox.Show("failed. Invalid credentials.");
@@ -103,7 +111,6 @@ namespace InterViewScheduler
 
             }
         }
-
 
         private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
         {

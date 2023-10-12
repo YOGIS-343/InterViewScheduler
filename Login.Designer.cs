@@ -44,7 +44,7 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point);
-            label1.Location = new Point(220, 31);
+            label1.Location = new Point(213, 9);
             label1.Name = "label1";
             label1.Size = new Size(90, 38);
             label1.TabIndex = 0;
@@ -154,6 +154,7 @@
             Controls.Add(label2);
             Controls.Add(BtnLogin);
             Controls.Add(label1);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             Name = "Login";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Login";
