@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -12,11 +13,11 @@ namespace InterViewScheduler
 {
     public partial class Login : Form
     {
+        public string Role;
         public Login()
         {
             InitializeComponent();
             BtnRegister.Enabled = false;
-
         }
         private void button1_Click(object sender, EventArgs e)
         {
@@ -26,7 +27,7 @@ namespace InterViewScheduler
             byte[] encData_byte = new byte[password.Length];
             encData_byte = System.Text.Encoding.UTF8.GetBytes(password);
             string encodedData = Convert.ToBase64String(encData_byte);
-            string Role = comboBox1.GetItemText(comboBox1.SelectedItem);
+             Role = comboBox1.GetItemText(comboBox1.SelectedItem);
 
             if (Role == "Recruiter")
             {
@@ -35,8 +36,10 @@ namespace InterViewScheduler
 
             if (user != null)
             {
+               
                 Form1 frm = new Form1();
-                frm.ShowDialog();
+                    frm.AdminToolStripMenuItem.Enabled = false;
+                    frm.ShowDialog();
                 Close();
             }
             else
@@ -52,8 +55,11 @@ namespace InterViewScheduler
 
                 if (user != null)
                 {
+
                     Form1 frm = new Form1();
                     frm.ShowDialog();
+                    this.Hide();
+                 //   Form1.mdiobj.AdminToolStripMenuItem.Enabled = true;
                     Close();
                 }
                 else
