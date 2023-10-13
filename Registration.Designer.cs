@@ -55,7 +55,7 @@
             // BtnRegister
             // 
             BtnRegister.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            BtnRegister.Location = new Point(359, 224);
+            BtnRegister.Location = new Point(375, 217);
             BtnRegister.Name = "BtnRegister";
             BtnRegister.Size = new Size(90, 37);
             BtnRegister.TabIndex = 12;
@@ -65,7 +65,7 @@
             // 
             // RegPassText
             // 
-            RegPassText.Location = new Point(172, 118);
+            RegPassText.Location = new Point(188, 116);
             RegPassText.Name = "RegPassText";
             RegPassText.Size = new Size(277, 27);
             RegPassText.TabIndex = 11;
@@ -74,7 +74,7 @@
             // 
             // RegUsernameText
             // 
-            RegUsernameText.Location = new Point(172, 68);
+            RegUsernameText.Location = new Point(188, 68);
             RegUsernameText.Name = "RegUsernameText";
             RegUsernameText.Size = new Size(277, 27);
             RegUsernameText.TabIndex = 10;
@@ -84,7 +84,7 @@
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point);
-            label3.Location = new Point(65, 117);
+            label3.Location = new Point(12, 118);
             label3.Name = "label3";
             label3.Size = new Size(101, 25);
             label3.TabIndex = 9;
@@ -94,7 +94,7 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point);
-            label2.Location = new Point(61, 67);
+            label2.Location = new Point(12, 70);
             label2.Name = "label2";
             label2.Size = new Size(105, 25);
             label2.TabIndex = 8;
@@ -104,15 +104,15 @@
             // 
             CnfrmPassBtn.AutoSize = true;
             CnfrmPassBtn.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point);
-            CnfrmPassBtn.Location = new Point(-1, 167);
+            CnfrmPassBtn.Location = new Point(12, 167);
             CnfrmPassBtn.Name = "CnfrmPassBtn";
-            CnfrmPassBtn.Size = new Size(167, 25);
+            CnfrmPassBtn.Size = new Size(170, 25);
             CnfrmPassBtn.TabIndex = 13;
-            CnfrmPassBtn.Text = "confirm Password  :";
+            CnfrmPassBtn.Text = "Confirm Password  :";
             // 
             // RegCnfrmPassText
             // 
-            RegCnfrmPassText.Location = new Point(172, 168);
+            RegCnfrmPassText.Location = new Point(188, 165);
             RegCnfrmPassText.Name = "RegCnfrmPassText";
             RegCnfrmPassText.Size = new Size(277, 27);
             RegCnfrmPassText.TabIndex = 14;
@@ -122,7 +122,7 @@
             // ShowcheckBox
             // 
             ShowcheckBox.AutoSize = true;
-            ShowcheckBox.Location = new Point(172, 201);
+            ShowcheckBox.Location = new Point(188, 198);
             ShowcheckBox.Name = "ShowcheckBox";
             ShowcheckBox.Size = new Size(67, 24);
             ShowcheckBox.TabIndex = 16;
@@ -148,6 +148,7 @@
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(label1);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             MaximizeBox = false;
             MinimizeBox = false;
             Name = "Registration";

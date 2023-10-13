@@ -135,7 +135,7 @@
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
             groupBox1.Text = "Candidate Details";
-           
+            // 
             // txtGoogleMeetUrl
             // 
             txtGoogleMeetUrl.Enabled = false;
@@ -474,7 +474,6 @@
             txtCondName.Name = "txtCondName";
             txtCondName.Size = new Size(266, 27);
             txtCondName.TabIndex = 2;
-           
             // 
             // label1
             // 
@@ -547,7 +546,6 @@
             AdminToolStripMenuItem.Name = "AdminToolStripMenuItem";
             AdminToolStripMenuItem.Size = new Size(106, 24);
             AdminToolStripMenuItem.Text = "Admin Panel";
-          
             // 
             // addRecToolStripMenuItem
             // 
@@ -579,12 +577,12 @@
             Controls.Add(groupBox2);
             Controls.Add(groupBox1);
             Controls.Add(menuStrip1);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             Icon = (Icon)resources.GetObject("$this.Icon");
             MainMenuStrip = menuStrip1;
             Name = "Form1";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Interview Scheduler - WonderBiz@2022";
-      
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
             groupBox2.ResumeLayout(false);
