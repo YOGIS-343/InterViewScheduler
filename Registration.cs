@@ -28,7 +28,7 @@ namespace InterViewScheduler
             string encodedData = Convert.ToBase64String(encData_byte);
 
 
-            List<User> users = JsonHelper.DeserializeFromFile<User>("users.json");
+            List<User> users = JsonHelper.DeserializeFromFile<User>("Data\\users.json");
 
             var found = users.FirstOrDefault(c => c.Username == username);
             if (found != null)
@@ -38,7 +38,7 @@ namespace InterViewScheduler
             else
             {
                 users.Add(new User { Username = username, Password = encodedData });
-                JsonHelper.SerializeToFile(users, "users.json");
+                JsonHelper.SerializeToFile(users, "Data\\users.json");
                 MessageBox.Show("Registration successful!");
 
                 Close();
