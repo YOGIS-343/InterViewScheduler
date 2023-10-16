@@ -40,6 +40,7 @@ namespace InterViewScheduler
 
                         Form1 frm = new Form1();
                         frm.AdminToolStripMenuItem.Enabled = false;
+                        frm.btn_delete.Enabled = false;
                         frm.ShowDialog();
                         Close();
                     }
