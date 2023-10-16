@@ -339,7 +339,7 @@ namespace InterViewScheduler
                 candidateDetails.CandidateDescription = ((InterViewScheduler.Template)cmbRounds.SelectedItem).CandidateDescription;
                 candidateDetails.InterViewerDescription = ((InterViewScheduler.Template)cmbRounds.SelectedItem).InterViewerDescription;
 
-                candidateDetails.GoogleMeetLink = txtGoogleMeetUrl.Text;
+                
 
                 if (candidateDetails.InterViewRound == "1st Round Interview")
                 {
@@ -349,9 +349,12 @@ namespace InterViewScheduler
                 {
                     candidateDetails.Summary = "Invitation for the second round interview with WonderBiz for the " + candidateDetails.Skills;
                 }
+
                 candidateDetails.Attendes = txtAttendes.Text;
+
                 if (!IsAnyNullOrEmpty(candidateDetails))
                 {
+                    candidateDetails.GoogleMeetLink = txtGoogleMeetUrl.Text;
 
                     if (cmbDuration.Text != "")
                     {
