@@ -74,7 +74,7 @@
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point);
-            label3.Location = new Point(12, 166);
+            label3.Location = new Point(12, 154);
             label3.Name = "label3";
             label3.Size = new Size(101, 25);
             label3.TabIndex = 3;
@@ -90,7 +90,7 @@
             // 
             // textBox2
             // 
-            textBox2.Location = new Point(123, 167);
+            textBox2.Location = new Point(122, 155);
             textBox2.Name = "textBox2";
             textBox2.Size = new Size(327, 27);
             textBox2.TabIndex = 5;
@@ -110,7 +110,7 @@
             // ShowcheckBox
             // 
             ShowcheckBox.AutoSize = true;
-            ShowcheckBox.Location = new Point(123, 200);
+            ShowcheckBox.Location = new Point(122, 197);
             ShowcheckBox.Name = "ShowcheckBox";
             ShowcheckBox.Size = new Size(67, 24);
             ShowcheckBox.TabIndex = 17;

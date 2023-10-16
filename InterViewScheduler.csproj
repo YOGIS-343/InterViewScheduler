@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="ADGV" Version="0.1.0.10" />
     <PackageReference Include="Google.Apis.Calendar.v3" Version="1.62.0.3171" />
     <PackageReference Include="Google.Apis.Drive.v3" Version="1.62.0.3155" />
     <PackageReference Include="Google.Apis.Sheets.v4" Version="1.62.0.3148" />
