@@ -430,14 +430,16 @@ namespace InterViewScheduler
             GoogleSheetsHelper googleSheetsHelper = new GoogleSheetsHelper(mailContaint.SpreadsheetId);
             //var gsp = new GoogleSheetParameters() { RangeColumnStart, RangeRowStart = 1, RangeColumnEnd = 12, RangeRowEnd = 100, FirstRowIsHeaders = true, SheetName = "sheet1" };
             DataTable dt = googleSheetsHelper.ToDataTable(googleSheetsHelper.GetDataFromSheet(gsp));
-            DataTable fdt = dt.Select("[Name Of Candidate] LIKE '%" + txtSearch.Text + "%' OR [Location] LIKE '%" + txtSearch.Text + "%'").CopyToDataTable();
+           // DataTable fdt = dt.Select("[Name Of Candidate] LIKE '%" + txtSearch.Text + "%' OR [Location] LIKE '%" + txtSearch.Text + "%'").CopyToDataTable();
             //DataTable fdt = new DataTable();
             //foreach (DataRow dr in drs)
             //{
             //    fdt.Rows.Add(dr);
             // }
             //fdt.AcceptChanges();
-            dgvCandList.DataSource = fdt;
+            string CadName = Convert.ToString(txtSearch.Text);
+            (dgvCandList.DataSource as DataTable).DefaultView.RowFilter = String.Format("Name like '%" + CadName + "%'");
+           //dgvCandList.DataSource = fdt;
         }
 
 
@@ -608,7 +610,7 @@ namespace InterViewScheduler
             InterviewerAdd interviewerAdd = new InterviewerAdd();
             interviewerAdd.ShowDialog();
         }
-
+   
         private void dgvCandList_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             indexRow = e.RowIndex;
