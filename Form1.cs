@@ -25,6 +25,8 @@ namespace InterViewScheduler
         private string DefaultColorNo = "1";
         private string DefaultInterViewerColorCode = "1";
         private int indexRow;
+
+        CandidateDetails candidateDetails = new CandidateDetails();
         public Form1()
         {
             try
@@ -75,7 +77,6 @@ namespace InterViewScheduler
         private void btnSchedule_Click(object sender, EventArgs e)
         {
 
-            CandidateDetails candidateDetails = new CandidateDetails();
 
 
 
@@ -430,7 +431,7 @@ namespace InterViewScheduler
             GoogleSheetsHelper googleSheetsHelper = new GoogleSheetsHelper(mailContaint.SpreadsheetId);
             //var gsp = new GoogleSheetParameters() { RangeColumnStart, RangeRowStart = 1, RangeColumnEnd = 12, RangeRowEnd = 100, FirstRowIsHeaders = true, SheetName = "sheet1" };
             DataTable dt = googleSheetsHelper.ToDataTable(googleSheetsHelper.GetDataFromSheet(gsp));
-           // DataTable fdt = dt.Select("[Name Of Candidate] LIKE '%" + txtSearch.Text + "%' OR [Location] LIKE '%" + txtSearch.Text + "%'").CopyToDataTable();
+            // DataTable fdt = dt.Select("[Name Of Candidate] LIKE '%" + txtSearch.Text + "%' OR [Location] LIKE '%" + txtSearch.Text + "%'").CopyToDataTable();
             //DataTable fdt = new DataTable();
             //foreach (DataRow dr in drs)
             //{
@@ -439,7 +440,19 @@ namespace InterViewScheduler
             //fdt.AcceptChanges();
             string CadName = Convert.ToString(txtSearch.Text);
             (dgvCandList.DataSource as DataTable).DefaultView.RowFilter = String.Format("Name like '%" + CadName + "%'");
-           //dgvCandList.DataSource = fdt;
+
+
+            string CadLocation = Convert.ToString(txtSearch.Text);
+            (dgvCandList.DataSource as DataTable).DefaultView.RowFilter = String.Format("Location like '%" + CadLocation + "%'");
+
+
+            string CadSkill = Convert.ToString(txtSearch.Text);
+            (dgvCandList.DataSource as DataTable).DefaultView.RowFilter = String.Format("Skills like '%" + CadSkill + "%'");
+
+
+            string CadInterviewDateTime = Convert.ToString(txtSearch.Text);
+            (dgvCandList.DataSource as DataTable).DefaultView.RowFilter = String.Format("InterviewDateTime like '%" + CadInterviewDateTime + "%'");
+            //dgvCandList.DataSource = fdt;
         }
 
 
@@ -610,7 +623,7 @@ namespace InterViewScheduler
             InterviewerAdd interviewerAdd = new InterviewerAdd();
             interviewerAdd.ShowDialog();
         }
-   
+
         private void dgvCandList_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             indexRow = e.RowIndex;
@@ -622,13 +635,13 @@ namespace InterViewScheduler
             txtCandEmail.Text = row.Cells[3].Value.ToString();
             txtSkills.Text = row.Cells[4].Value.ToString();
             cmbLocation.Text = row.Cells[5].Value.ToString();
-            //dtpLWD.Text = row.Cells[6].Value.ToString();
+            dtpLWD.Text = Convert.ToDateTime(dgvCandList.Rows[e.RowIndex].Cells[6].Value.ToString(), CultureInfo.InvariantCulture).ToString();
             cmbSchedulers.Text = row.Cells[7].Value.ToString();
 
             cmbStatus.Text = row.Cells[9].Value.ToString();
             txtRemark.Text = row.Cells[10].Value.ToString();
             cmbRounds.Text = row.Cells[11].Value.ToString();
-            //dtpInterviewDate.Text = row.Cells[12].Value.ToString();
+            dtpInterviewDate.Text = Convert.ToDateTime(dgvCandList.Rows[e.RowIndex].Cells[12].Value.ToString().Split(' ')[0].ToString(), CultureInfo.InvariantCulture).ToString();
             cmbInterviewerNames.Text = row.Cells[13].Value.ToString();
             txtAttendes.Text = row.Cells[14].Value.ToString();
             txtResumeLink.Text = row.Cells[15].Value.ToString();
@@ -643,11 +656,35 @@ namespace InterViewScheduler
 
         private void btn_Delete_Click(object sender, EventArgs e)
         {
+            /*if (System.IO.File.Exists("Details.json"))
+            {
+                int Id = Convert.ToInt32(EditedRowId == "" ? candidateDetails.Count() + 1 : EditedRowId);
+                var found = candidateDetails.FirstOrDefault(c => c.Id == Id);
+                if (found != null)
+                {
+
+                    candidateDetails.Remove(found);
+
+                    WriteJsonFile(candidateDetails);
+
+                    string Rjson = System.IO.File.ReadAllText("Details.json");
+
+
+                    var table = JsonConvert.DeserializeObject<DataSet>(Rjson).Tables[0];
+                    dgvCandList.DataSource = table;
+
+
+                }
+
+            }*/
+
             if (this.dgvCandList.SelectedRows.Count > 0)
             {
                 dgvCandList.Rows.RemoveAt(this.dgvCandList.SelectedRows[0].Index);
             }
             MessageBox.Show("Candidate Details Deleted Suceessfully");
         }
+
+        
     }
 }
