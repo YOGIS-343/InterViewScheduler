@@ -24,6 +24,7 @@ namespace InterViewScheduler
         private int EditedRowId = 0;
         private string DefaultColorNo = "1";
         private string DefaultInterViewerColorCode = "1";
+        private int indexRow;
         public Form1()
         {
             try
@@ -608,6 +609,43 @@ namespace InterViewScheduler
             interviewerAdd.ShowDialog();
         }
 
+        private void dgvCandList_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            indexRow = e.RowIndex;
+            DataGridViewRow row = dgvCandList.Rows[indexRow];
 
+            //EditedRowId = row.Cells[0].Value.ToString();
+            txtCondName.Text = row.Cells[1].Value.ToString();
+            txtCondMobile.Text = row.Cells[2].Value.ToString();
+            txtCandEmail.Text = row.Cells[3].Value.ToString();
+            txtSkills.Text = row.Cells[4].Value.ToString();
+            cmbLocation.Text = row.Cells[5].Value.ToString();
+            //dtpLWD.Text = row.Cells[6].Value.ToString();
+            cmbSchedulers.Text = row.Cells[7].Value.ToString();
+
+            cmbStatus.Text = row.Cells[9].Value.ToString();
+            txtRemark.Text = row.Cells[10].Value.ToString();
+            cmbRounds.Text = row.Cells[11].Value.ToString();
+            //dtpInterviewDate.Text = row.Cells[12].Value.ToString();
+            cmbInterviewerNames.Text = row.Cells[13].Value.ToString();
+            txtAttendes.Text = row.Cells[14].Value.ToString();
+            txtResumeLink.Text = row.Cells[15].Value.ToString();
+            txtFeedbackLink.Text = row.Cells[16].Value.ToString();
+            cmbDuration.Text = row.Cells[17].Value.ToString();
+            txtGoogleMeetUrl.Text = row.Cells[18].Value.ToString();
+
+
+
+
+        }
+
+        private void btn_Delete_Click(object sender, EventArgs e)
+        {
+            if (this.dgvCandList.SelectedRows.Count > 0)
+            {
+                dgvCandList.Rows.RemoveAt(this.dgvCandList.SelectedRows[0].Index);
+            }
+            MessageBox.Show("Candidate Details Deleted Suceessfully");
+        }
     }
 }
