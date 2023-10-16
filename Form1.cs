@@ -647,5 +647,10 @@ namespace InterViewScheduler
             }
             MessageBox.Show("Candidate Details Deleted Suceessfully");
         }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
+        }
     }
 }
