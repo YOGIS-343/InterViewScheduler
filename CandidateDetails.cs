@@ -31,11 +31,12 @@ namespace CalendarQuickstart
         public string? ResumeLink { get; set; } = "New Record";
         public string? FeedbackLink { get; set; } = "New Record";
         public int Duration { get; set; } = 60;
-        public string GoogleMeetLink { get; set; } = "GoogleMeetLink";
 
-        //
         public string? SchedulersEmail { get; set; }
         public string? InterViewerEmail { get; set; }
+
+        //Below properties not mendotory
+        public string GoogleMeetLink { get; set; } = "GoogleMeetLink";
         public string? ZoomUrl { get; set; }
         public string? MeettingId { get; set; }
         public string? PassCode { get; set; }

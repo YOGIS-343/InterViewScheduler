@@ -31,6 +31,7 @@
             components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             groupBox1 = new GroupBox();
+            btn_delete = new Button();
             txtGoogleMeetUrl = new TextBox();
             lblGoogleMeetUrl = new Label();
             cmbDuration = new ComboBox();
@@ -89,6 +90,7 @@
             // 
             // groupBox1
             // 
+            groupBox1.Controls.Add(btn_delete);
             groupBox1.Controls.Add(txtGoogleMeetUrl);
             groupBox1.Controls.Add(lblGoogleMeetUrl);
             groupBox1.Controls.Add(cmbDuration);
@@ -135,6 +137,16 @@
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
             groupBox1.Text = "Candidate Details";
+            // 
+            // btn_delete
+            // 
+            btn_delete.Location = new Point(1199, 286);
+            btn_delete.Name = "btn_delete";
+            btn_delete.Size = new Size(94, 29);
+            btn_delete.TabIndex = 47;
+            btn_delete.Text = "Delete";
+            btn_delete.UseVisualStyleBackColor = true;
+            btn_delete.Click += btn_Delete_Click;
             // 
             // txtGoogleMeetUrl
             // 
@@ -507,6 +519,7 @@
             dgvCandList.RowTemplate.Height = 29;
             dgvCandList.Size = new Size(1301, 282);
             dgvCandList.TabIndex = 0;
+            dgvCandList.CellClick += dgvCandList_CellClick;
             dgvCandList.CellDoubleClick += dgvCandList_CellDoubleClick;
             // 
             // txtSearch
@@ -646,5 +659,6 @@
         private ToolStripMenuItem addInterToolStripMenuItem;
         public ToolStripMenuItem AdminToolStripMenuItem;
         private ContextMenuStrip contextMenuStrip1;
+        public Button btn_delete;
     }
 }

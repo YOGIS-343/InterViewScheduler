@@ -18,6 +18,7 @@ namespace InterViewScheduler
         {
             InitializeComponent();
             BtnRegister.Enabled = false;
+            this.AcceptButton = BtnLogin;
         }
         private void button1_Click(object sender, EventArgs e)
         {
@@ -40,6 +41,7 @@ namespace InterViewScheduler
 
                         Form1 frm = new Form1();
                         frm.AdminToolStripMenuItem.Enabled = false;
+                        frm.btn_delete.Enabled = false;
                         frm.ShowDialog();
                         Close();
                     }
