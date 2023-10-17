@@ -40,12 +40,20 @@ namespace InterViewScheduler
 
         private List<Combobox_Item> CreateColorCodeList()
         {
-            combobox_Items.Add(new Combobox_Item("Red", new Bitmap("Colorcode\\Red.jpg"), "1"));
-            combobox_Items.Add(new Combobox_Item("Black", new Bitmap("Colorcode\\Black.jpg"), "2"));
-            combobox_Items.Add(new Combobox_Item("Yellow", new Bitmap("Colorcode\\Yellow.jpg"), "3"));
-            combobox_Items.Add(new Combobox_Item("Green", new Bitmap("Colorcode\\green.png"), "4"));
-            combobox_Items.Add(new Combobox_Item("Brown", new Bitmap("Colorcode\\Brown.jpg"), "5"));
-            combobox_Items.Add(new Combobox_Item("Purple", new Bitmap("Colorcode\\Purple.jpg"), "6"));
+     
+            combobox_Items.Add(new Combobox_Item("Who knows", new Bitmap("Colorcode\\Who knows.jpg"), "1"));
+            combobox_Items.Add(new Combobox_Item("Lavender", new Bitmap("Colorcode\\Lavender.jpg"), "2"));
+            combobox_Items.Add(new Combobox_Item("Sage", new Bitmap("Colorcode\\Sage.jpg"), "3"));
+            combobox_Items.Add(new Combobox_Item("Grape", new Bitmap("Colorcode\\Grape.jpg"), "4"));
+            combobox_Items.Add(new Combobox_Item("Flamingo", new Bitmap("Colorcode\\Flamingo.jpg"), "5"));
+            combobox_Items.Add(new Combobox_Item("Banana", new Bitmap("Colorcode\\Banana.jpg"), "6"));
+            combobox_Items.Add(new Combobox_Item("Tangerine", new Bitmap("Colorcode\\Tangerine.jpg"), "7"));
+            combobox_Items.Add(new Combobox_Item("Peacock", new Bitmap("Colorcode\\Peacock.jpg"), "8"));
+            combobox_Items.Add(new Combobox_Item("Graphite", new Bitmap("Colorcode\\Graphite.jpg"), "9"));
+            combobox_Items.Add(new Combobox_Item("Blueberry", new Bitmap("Colorcode\\Blurberry.jpg"), "10"));
+            combobox_Items.Add(new Combobox_Item("Basil", new Bitmap("Colorcode\\Basil.jpg"), "11"));
+            combobox_Items.Add(new Combobox_Item("Tomato", new Bitmap("Colorcode\\Tomato.jpg"), "12"));
+
 
             return combobox_Items;
         }
