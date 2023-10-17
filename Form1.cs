@@ -313,7 +313,7 @@ namespace InterViewScheduler
                 candidateDetails.Name = txtCondName.Text;
                 candidateDetails.Email = txtCandEmail.Text;
                 candidateDetails.Mobile = txtCondMobile.Text;
-
+                
                 candidateDetails.FeedbackLink = txtFeedbackLink.Text;
 
                 candidateDetails.Skills = txtSkills.Text;
