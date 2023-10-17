@@ -70,15 +70,10 @@ namespace InterViewScheduler
             DataTable dataTable = googleSheetsHelper.ToDataTable(googleSheetsHelper.GetDataFromSheet(gsp));
             dgvCandList.DataSource = dataTable;
 
-
-
         }
 
         private void btnSchedule_Click(object sender, EventArgs e)
         {
-
-
-
 
             try
             {
