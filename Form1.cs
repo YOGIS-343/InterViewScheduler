@@ -25,6 +25,8 @@ namespace InterViewScheduler
         private string DefaultColorNo = "1";
         private string DefaultInterViewerColorCode = "1";
         private int indexRow;
+
+        CandidateDetails candidateDetails = new CandidateDetails();
         public Form1()
         {
             try
@@ -75,7 +77,6 @@ namespace InterViewScheduler
         private void btnSchedule_Click(object sender, EventArgs e)
         {
 
-            CandidateDetails candidateDetails = new CandidateDetails();
 
 
 
@@ -339,7 +340,7 @@ namespace InterViewScheduler
                 candidateDetails.CandidateDescription = ((InterViewScheduler.Template)cmbRounds.SelectedItem).CandidateDescription;
                 candidateDetails.InterViewerDescription = ((InterViewScheduler.Template)cmbRounds.SelectedItem).InterViewerDescription;
 
-                candidateDetails.GoogleMeetLink = txtGoogleMeetUrl.Text;
+                
 
                 if (candidateDetails.InterViewRound == "1st Round Interview")
                 {
@@ -349,9 +350,12 @@ namespace InterViewScheduler
                 {
                     candidateDetails.Summary = "Invitation for the second round interview with WonderBiz for the " + candidateDetails.Skills;
                 }
+
                 candidateDetails.Attendes = txtAttendes.Text;
+
                 if (!IsAnyNullOrEmpty(candidateDetails))
                 {
+                    candidateDetails.GoogleMeetLink = txtGoogleMeetUrl.Text;
 
                     if (cmbDuration.Text != "")
                     {
@@ -431,14 +435,28 @@ namespace InterViewScheduler
             GoogleSheetsHelper googleSheetsHelper = new GoogleSheetsHelper(mailContaint.SpreadsheetId);
             //var gsp = new GoogleSheetParameters() { RangeColumnStart, RangeRowStart = 1, RangeColumnEnd = 12, RangeRowEnd = 100, FirstRowIsHeaders = true, SheetName = "sheet1" };
             DataTable dt = googleSheetsHelper.ToDataTable(googleSheetsHelper.GetDataFromSheet(gsp));
-            DataTable fdt = dt.Select("[Name Of Candidate] LIKE '%" + txtSearch.Text + "%' OR [Location] LIKE '%" + txtSearch.Text + "%'").CopyToDataTable();
+            // DataTable fdt = dt.Select("[Name Of Candidate] LIKE '%" + txtSearch.Text + "%' OR [Location] LIKE '%" + txtSearch.Text + "%'").CopyToDataTable();
             //DataTable fdt = new DataTable();
             //foreach (DataRow dr in drs)
             //{
             //    fdt.Rows.Add(dr);
             // }
             //fdt.AcceptChanges();
-            dgvCandList.DataSource = fdt;
+            string CadName = Convert.ToString(txtSearch.Text);
+            (dgvCandList.DataSource as DataTable).DefaultView.RowFilter = String.Format("Name like '%" + CadName + "%'");
+
+
+            string CadLocation = Convert.ToString(txtSearch.Text);
+            (dgvCandList.DataSource as DataTable).DefaultView.RowFilter = String.Format("Location like '%" + CadLocation + "%'");
+
+
+            string CadSkill = Convert.ToString(txtSearch.Text);
+            (dgvCandList.DataSource as DataTable).DefaultView.RowFilter = String.Format("Skills like '%" + CadSkill + "%'");
+
+
+            string CadInterviewDateTime = Convert.ToString(txtSearch.Text);
+            (dgvCandList.DataSource as DataTable).DefaultView.RowFilter = String.Format("InterviewDateTime like '%" + CadInterviewDateTime + "%'");
+            //dgvCandList.DataSource = fdt;
         }
 
 
@@ -648,11 +666,35 @@ namespace InterViewScheduler
 
         private void btn_Delete_Click(object sender, EventArgs e)
         {
+            /*if (System.IO.File.Exists("Details.json"))
+            {
+                int Id = Convert.ToInt32(EditedRowId == "" ? candidateDetails.Count() + 1 : EditedRowId);
+                var found = candidateDetails.FirstOrDefault(c => c.Id == Id);
+                if (found != null)
+                {
+
+                    candidateDetails.Remove(found);
+
+                    WriteJsonFile(candidateDetails);
+
+                    string Rjson = System.IO.File.ReadAllText("Details.json");
+
+
+                    var table = JsonConvert.DeserializeObject<DataSet>(Rjson).Tables[0];
+                    dgvCandList.DataSource = table;
+
+
+                }
+
+            }*/
+
             if (this.dgvCandList.SelectedRows.Count > 0)
             {
                 dgvCandList.Rows.RemoveAt(this.dgvCandList.SelectedRows[0].Index);
             }
             MessageBox.Show("Candidate Details Deleted Suceessfully");
         }
+
+        
     }
 }
