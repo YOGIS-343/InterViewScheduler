@@ -22,14 +22,15 @@ namespace InterViewScheduler
         }
         private void button1_Click(object sender, EventArgs e)
         {
-            string username = textBox1.Text;
-            string password = textBox2.Text; 
-            { 
+            
+            string username = textBox1.Text.ToLower();
+            string password = textBox2.Text;
+            {
 
                 byte[] encData_byte = new byte[password.Length];
-            encData_byte = System.Text.Encoding.UTF8.GetBytes(password);
-            string encodedData = Convert.ToBase64String(encData_byte);
-            Role = comboBox1.GetItemText(comboBox1.SelectedItem);
+                encData_byte = System.Text.Encoding.UTF8.GetBytes(password);
+                string encodedData = Convert.ToBase64String(encData_byte);
+                Role = comboBox1.GetItemText(comboBox1.SelectedItem);
 
                 if (Role == "Recruiter")
                 {
@@ -69,7 +70,7 @@ namespace InterViewScheduler
                         MessageBox.Show("Login failed. Invalid credentials.");
                     }
                 }
-              
+                
             }
         }
 

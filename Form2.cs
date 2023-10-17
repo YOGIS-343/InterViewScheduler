@@ -46,7 +46,6 @@ namespace InterViewScheduler
             combobox_Items.Add(new Combobox_Item("Green", new Bitmap("Colorcode\\green.png"), "4"));
             combobox_Items.Add(new Combobox_Item("Brown", new Bitmap("Colorcode\\Brown.jpg"), "5"));
             combobox_Items.Add(new Combobox_Item("Purple", new Bitmap("Colorcode\\Purple.jpg"), "6"));
-
             return combobox_Items;
         }
 
