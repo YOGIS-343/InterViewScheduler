@@ -40,7 +40,7 @@ namespace InterViewScheduler
 
         private List<Combobox_Item> CreateColorCodeList()
         {
-     
+
             combobox_Items.Add(new Combobox_Item("Who knows", new Bitmap("Colorcode\\Who knows.jpg"), "1"));
             combobox_Items.Add(new Combobox_Item("Lavender", new Bitmap("Colorcode\\Lavender.jpg"), "2"));
             combobox_Items.Add(new Combobox_Item("Sage", new Bitmap("Colorcode\\Sage.jpg"), "3"));

@@ -178,7 +178,7 @@ namespace InterViewScheduler
             body.ColorId = "7";
 
             //  EventsResource.InsertRequest request = new EventsResource.InsertRequest(_calService, body, candidateDetails.SchedulersEmail);
-            EventsResource.InsertRequest request = new EventsResource.InsertRequest(_calService, body, "interviews@wonderbiz.in");
+            EventsResource.InsertRequest request = new EventsResource.InsertRequest(_calService, body, "suhas.chougule@wonderbiz.in");
 
             Event response = null;
             try
@@ -273,7 +273,7 @@ namespace InterViewScheduler
 
 
             //  EventsResource.InsertRequest request = new EventsResource.InsertRequest(_calService, body, candidateDetails.SchedulersEmail);
-            EventsResource.InsertRequest request = new EventsResource.InsertRequest(_calService, body, "interviews@wonderbiz.in");
+            EventsResource.InsertRequest request = new EventsResource.InsertRequest(_calService, body, "suhas.chougule@wonderbiz.in");
 
             //shaheem.shaikh@wonderbiz.in
             request.SendNotifications = true;
