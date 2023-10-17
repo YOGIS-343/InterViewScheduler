@@ -18,10 +18,12 @@ namespace InterViewScheduler
         {
             InitializeComponent();
             BtnRegister.Enabled = false;
+            this.AcceptButton = BtnLogin;
         }
         private void button1_Click(object sender, EventArgs e)
         {
-            string username = textBox1.Text;
+            
+            string username = textBox1.Text.ToLower();
             string password = textBox2.Text;
             {
 
@@ -68,7 +70,7 @@ namespace InterViewScheduler
                         MessageBox.Show("Login failed. Invalid credentials.");
                     }
                 }
-
+                
             }
         }
 
