@@ -75,7 +75,7 @@ namespace InterViewScheduler
                 //}
             }
 
-            candidateDetails.CandidateDescription = candidateDetails.CandidateDescription.Replace("{CandName}", candidateDetails.Name).Replace("{CandPosition}", candidateDetails.Skills).Replace("{InterviewDate}", candidateDetails.InterviewDateTime.Split(' ')[0]).Replace("{InterviewTime}", candidateDetails.InterviewDateTime.Split(' ')[1]).Replace("{ZoomUrl}", candidateDetails.ZoomUrl).Replace("{MeetingId}", candidateDetails.MeettingId).Replace("{PassCode}", candidateDetails.PassCode);
+            candidateDetails.CandidateDescription = candidateDetails.CandidateDescription.Replace("{CandName}", candidateDetails.Name).Replace("{Mode}", candidateDetails.Mode).Replace("{CandPosition}", candidateDetails.Skills).Replace("{InterviewDate}", candidateDetails.InterviewDateTime.Split(' ')[0]).Replace("{InterviewTime}", candidateDetails.InterviewDateTime.Split(' ')[1]).Replace("{ZoomUrl}", candidateDetails.ZoomUrl).Replace("{MeetingId}", candidateDetails.MeettingId).Replace("{PassCode}", candidateDetails.PassCode);
 
             Event body = new Event();
            
@@ -178,7 +178,7 @@ namespace InterViewScheduler
             body.ColorId = "7";
 
             //  EventsResource.InsertRequest request = new EventsResource.InsertRequest(_calService, body, candidateDetails.SchedulersEmail);
-            EventsResource.InsertRequest request = new EventsResource.InsertRequest(_calService, body, "interviews@wonderbiz.in");
+            EventsResource.InsertRequest request = new EventsResource.InsertRequest(_calService, body, "suhas.chougule@wonderbiz.in");
 
             Event response = null;
             try
@@ -273,7 +273,7 @@ namespace InterViewScheduler
 
 
             //  EventsResource.InsertRequest request = new EventsResource.InsertRequest(_calService, body, candidateDetails.SchedulersEmail);
-            EventsResource.InsertRequest request = new EventsResource.InsertRequest(_calService, body, "interviews@wonderbiz.in");
+            EventsResource.InsertRequest request = new EventsResource.InsertRequest(_calService, body, "suhas.chougule@wonderbiz.in");
 
             //shaheem.shaikh@wonderbiz.in
             request.SendNotifications = true;

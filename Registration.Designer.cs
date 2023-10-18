@@ -154,6 +154,7 @@
             Name = "Registration";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Registration";
+            Load += Registration_Load;
             ((System.ComponentModel.ISupportInitialize)errorProvider1).EndInit();
             ResumeLayout(false);
             PerformLayout();

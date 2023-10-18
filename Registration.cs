@@ -79,5 +79,10 @@ namespace InterViewScheduler
             else
                 e.Handled = false;
         }
+
+        private void Registration_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
