@@ -24,6 +24,8 @@ namespace InterViewScheduler
         public GoogleSheetParameters gsp = null;
         private int EditedRowId = 0;
         private string DefaultColorNo = "1";
+        private string SchedulerEmail;
+        private string InterviewerEmail;
         private string DefaultInterViewerColorCode = "1";
         private int indexRow;
 
@@ -96,8 +98,9 @@ namespace InterViewScheduler
                 candidateDetails.Email = txtCandEmail.Text;
                 candidateDetails.Mobile = txtCondMobile.Text;
                 candidateDetails.Skills = txtSkills.Text;
+                candidateDetails.Mode = ModeOfInterview.GetItemText(ModeOfInterview.SelectedItem);
                 candidateDetails.Location = ((InterViewScheduler.Locations)cmbLocation.SelectedItem).Location;
-                //CultureInfo culture = new CultureInfo("en-US");
+                //CultureInfo culture = new CultureInfo("en-US")
                 candidateDetails.LastWorkingDate = dtpLWD.Text;
                 candidateDetails.InterViewRound = ((InterViewScheduler.Template)cmbRounds.SelectedItem).Id;
                 candidateDetails.InterviewDateTime = dtpInterviewDate.Text + " " + cmbdtpInterviewTime.Text;//Convert.ToDateTime(dtpInterviewDate.Text + " " + cmbdtpInterviewTime.Text, CultureInfo.InvariantCulture);
@@ -639,12 +642,21 @@ namespace InterViewScheduler
         {
             DefaultColorNo = ((InterViewScheduler.Schedulers)cmbSchedulers.SelectedItem).ColorCode;
 
+            SchedulerEmail = ((InterViewScheduler.Schedulers)cmbSchedulers.SelectedItem).Email;
+
+            txtAttendes.Text = SchedulerEmail + "," + InterviewerEmail;
+
+
             //JsonOperations.ReadSchedulers().Schedulers.OrderBy(Schedulers => Schedulers.Name).ToList();
         }
 
         private void cmbInterviewerNames_SelectedIndexChanged(object sender, EventArgs e)
         {
             DefaultInterViewerColorCode = ((InterViewScheduler.Interviewers)cmbInterviewerNames.SelectedItem).InterViewerColorCode;
+
+            InterviewerEmail = ((InterViewScheduler.Interviewers)cmbInterviewerNames.SelectedItem).interviewerEmail;
+
+            txtAttendes.Text = SchedulerEmail + "," + InterviewerEmail;
         }
 
         private void addRecToolStripMenuItem_Click(object sender, EventArgs e)
