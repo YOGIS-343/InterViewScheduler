@@ -18,6 +18,8 @@ namespace CalendarQuickstart
         public string? Mobile { get; set; }
         public string? Email { get; set; }
         public string? Skills { get; set; }
+
+        public string? Mode { get; set; }
         public string? Location { get; set; }
         public string? LastWorkingDate { get; set; }
         public string? SchedulersName { get; set; }

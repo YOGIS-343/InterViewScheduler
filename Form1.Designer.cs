@@ -31,6 +31,8 @@
             components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             groupBox1 = new GroupBox();
+            label16 = new Label();
+            ModeOfInterview = new ComboBox();
             btn_delete = new Button();
             txtGoogleMeetUrl = new TextBox();
             lblGoogleMeetUrl = new Label();
@@ -90,6 +92,8 @@
             // 
             // groupBox1
             // 
+            groupBox1.Controls.Add(label16);
+            groupBox1.Controls.Add(ModeOfInterview);
             groupBox1.Controls.Add(btn_delete);
             groupBox1.Controls.Add(txtGoogleMeetUrl);
             groupBox1.Controls.Add(lblGoogleMeetUrl);
@@ -138,9 +142,27 @@
             groupBox1.TabStop = false;
             groupBox1.Text = "Candidate Details";
             // 
+            // label16
+            // 
+            label16.AutoSize = true;
+            label16.Location = new Point(34, 298);
+            label16.Name = "label16";
+            label16.Size = new Size(149, 20);
+            label16.TabIndex = 50;
+            label16.Text = "Mode Of Interview :- ";
+            // 
+            // ModeOfInterview
+            // 
+            ModeOfInterview.FormattingEnabled = true;
+            ModeOfInterview.Items.AddRange(new object[] { "Virtual", "F2F" });
+            ModeOfInterview.Location = new Point(225, 295);
+            ModeOfInterview.Name = "ModeOfInterview";
+            ModeOfInterview.Size = new Size(216, 28);
+            ModeOfInterview.TabIndex = 49;
+            // 
             // btn_delete
             // 
-            btn_delete.Location = new Point(1199, 286);
+            btn_delete.Location = new Point(1199, 285);
             btn_delete.Name = "btn_delete";
             btn_delete.Size = new Size(94, 29);
             btn_delete.TabIndex = 47;
@@ -549,7 +571,8 @@
             menuStrip1.Items.AddRange(new ToolStripItem[] { AdminToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(1323, 28);
+            menuStrip1.Padding = new Padding(6, 3, 0, 3);
+            menuStrip1.Size = new Size(1323, 30);
             menuStrip1.TabIndex = 4;
             menuStrip1.Text = "menuStrip1";
             // 
@@ -660,5 +683,7 @@
         public ToolStripMenuItem AdminToolStripMenuItem;
         private ContextMenuStrip contextMenuStrip1;
         public Button btn_delete;
+        private ComboBox ModeOfInterview;
+        private Label label16;
     }
 }
