@@ -485,10 +485,6 @@ namespace InterViewScheduler
                 dv.RowFilter = $"Name like '%{searchTerm}%' OR Location like '%{searchTerm}%' OR Skills like '%{searchTerm}%' OR InterviewDateTime like '%{searchTerm}%' OR SchedulersName like '%{searchTerm}%' OR InterViewStatus like '%{searchTerm}%' OR InterViewRound like '%{searchTerm}%' OR InterViewerName like '%{searchTerm}%'";
             }
 
-            txtSearch.Text = " ";
-
-
-            dgvCandList.Focus();
 
         }
 
