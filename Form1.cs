@@ -9,6 +9,7 @@ using System.Globalization;
 using System.Net;
 using System.Reflection;
 using System.Runtime.InteropServices;
+using System.Text;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using Event = Google.Apis.Calendar.v3.Data.Event;
@@ -423,6 +424,43 @@ namespace InterViewScheduler
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
+            //using (StreamReader r = new StreamReader("Details.json"))
+            //{
+            //    string json = r.ReadToEnd();
+            //    mailContaint = JsonConvert.DeserializeObject<MailContaint>(json);
+            //    gsp = JsonConvert.DeserializeObject<GoogleSheetParameters>(json);
+            //    r.Close();
+            //}
+            //GoogleSheetsHelper googleSheetsHelper = new GoogleSheetsHelper(mailContaint.SpreadsheetId);
+            ////var gsp = new GoogleSheetParameters() { RangeColumnStart, RangeRowStart = 1, RangeColumnEnd = 12, RangeRowEnd = 100, FirstRowIsHeaders = true, SheetName = "sheet1" };
+            //DataTable dt = googleSheetsHelper.ToDataTable(googleSheetsHelper.GetDataFromSheet(gsp));
+            //// DataTable fdt = dt.Select("[Name Of Candidate] LIKE '%" + txtSearch.Text + "%' OR [Location] LIKE '%" + txtSearch.Text + "%'").CopyToDataTable();
+            //DataTable fdt = new DataTable();
+            //foreach (DataRow dr in drs)
+            //{
+            //    fdt.Rows.Add(dr);
+            // }
+            //fdt.AcceptChanges();
+            //dgvCandList.DataSource = fdt;
+            /*
+                        string CadName = Convert.ToString(txtSearch.Text);
+                        (dgvCandList.DataSource as DataTable).DefaultView.RowFilter = String.Format("Name like '%" + CadName + "%'");
+
+                         string CadLocation = Convert.ToString(txtSearch.Text);
+                        (dgvCandList.DataSource as DataTable).DefaultView.RowFilter = String.Format("Location like '%" + CadLocation + "%'");
+
+
+                        string CadSkill = Convert.ToString(txtSearch.Text);
+                        (dgvCandList.DataSource as DataTable).DefaultView.RowFilter = String.Format("Skills like '%" + CadSkill + "%'");
+
+
+                        string CadInterviewDateTime = Convert.ToString(txtSearch.Text);
+                        (dgvCandList.DataSource as DataTable).DefaultView.RowFilter = String.Format("InterviewDateTime like '%" + CadInterviewDateTime + "%'");
+
+            */
+
+
+            
             using (StreamReader r = new StreamReader("Details.json"))
             {
                 string json = r.ReadToEnd();
@@ -430,32 +468,30 @@ namespace InterViewScheduler
                 gsp = JsonConvert.DeserializeObject<GoogleSheetParameters>(json);
                 r.Close();
             }
+
             GoogleSheetsHelper googleSheetsHelper = new GoogleSheetsHelper(mailContaint.SpreadsheetId);
-            //var gsp = new GoogleSheetParameters() { RangeColumnStart, RangeRowStart = 1, RangeColumnEnd = 12, RangeRowEnd = 100, FirstRowIsHeaders = true, SheetName = "sheet1" };
+
             DataTable dt = googleSheetsHelper.ToDataTable(googleSheetsHelper.GetDataFromSheet(gsp));
-            // DataTable fdt = dt.Select("[Name Of Candidate] LIKE '%" + txtSearch.Text + "%' OR [Location] LIKE '%" + txtSearch.Text + "%'").CopyToDataTable();
-            //DataTable fdt = new DataTable();
-            //foreach (DataRow dr in drs)
-            //{
-            //    fdt.Rows.Add(dr);
-            // }
-            //fdt.AcceptChanges();
-            string CadName = Convert.ToString(txtSearch.Text);
-            (dgvCandList.DataSource as DataTable).DefaultView.RowFilter = String.Format("Name like '%" + CadName + "%'");
 
 
-            string CadLocation = Convert.ToString(txtSearch.Text);
-            (dgvCandList.DataSource as DataTable).DefaultView.RowFilter = String.Format("Location like '%" + CadLocation + "%'");
+
+            string searchTerm = Convert.ToString(txtSearch.Text);
+
+            DataView dv = (dgvCandList.DataSource as DataTable).DefaultView;
+
+            // Reset the filter before applying a new one
+            dv.RowFilter = string.Empty;
+
+            if (!string.IsNullOrEmpty(searchTerm))
+            {
+                // Use "OR" to search in either column
+                dv.RowFilter = $"Name like '%{searchTerm}%' OR Location like '%{searchTerm}%' OR Skills like '%{searchTerm}%' OR InterviewDateTime like '%{searchTerm}%' OR SchedulersName like '%{searchTerm}%' OR InterViewStatus like '%{searchTerm}%' OR InterViewRound like '%{searchTerm}%' OR InterViewerName like '%{searchTerm}%'";
+            }
 
 
-            string CadSkill = Convert.ToString(txtSearch.Text);
-            (dgvCandList.DataSource as DataTable).DefaultView.RowFilter = String.Format("Skills like '%" + CadSkill + "%'");
-
-
-            string CadInterviewDateTime = Convert.ToString(txtSearch.Text);
-            (dgvCandList.DataSource as DataTable).DefaultView.RowFilter = String.Format("InterviewDateTime like '%" + CadInterviewDateTime + "%'");
-            //dgvCandList.DataSource = fdt;
         }
+
+
 
 
         private void btnSingleOpenFileDialog_Click(object sender, EventArgs e)
@@ -673,33 +709,27 @@ namespace InterViewScheduler
 
         private void btn_Delete_Click(object sender, EventArgs e)
         {
-            /*if (System.IO.File.Exists("Details.json"))
-            {
-                int Id = Convert.ToInt32(EditedRowId == "" ? candidateDetails.Count() + 1 : EditedRowId);
-                var found = candidateDetails.FirstOrDefault(c => c.Id == Id);
-                if (found != null)
-                {
 
-                    candidateDetails.Remove(found);
-
-                    WriteJsonFile(candidateDetails);
-
-                    string Rjson = System.IO.File.ReadAllText("Details.json");
-
-
-                    var table = JsonConvert.DeserializeObject<DataSet>(Rjson).Tables[0];
-                    dgvCandList.DataSource = table;
-
-
-                }
-
-            }*/
-
-            if (this.dgvCandList.SelectedRows.Count > 0)
-            {
-                dgvCandList.Rows.RemoveAt(this.dgvCandList.SelectedRows[0].Index);
-            }
+            dgvCandList.Rows.RemoveAt(this.dgvCandList.SelectedRows[0].Index);
+            DialogResult result = MessageBox.Show("Do you want to delete this candidate details?", "Delete", MessageBoxButtons.YesNo);
             MessageBox.Show("Candidate Details Deleted Suceessfully");
+
+            /* DialogResult result = MessageBox.Show("Do you want to delete this candidate details?", "Delete", MessageBoxButtons.YesNo);
+             if (result == DialogResult.Yes)
+             {
+                 if (this.dgvCandList.SelectedRows.Count > 0)
+                 {
+                     dgvCandList.Rows.RemoveAt(this.dgvCandList.SelectedRows[0].Index);
+                 }
+                 MessageBox.Show("Candidate Details Deleted Suceessfully");
+             }*/
+
+        }
+
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
         }
 
 
