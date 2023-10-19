@@ -75,7 +75,7 @@ namespace InterViewScheduler
                 //}
             }
 
-            candidateDetails.CandidateDescription = candidateDetails.CandidateDescription.Replace("{CandName}", candidateDetails.Name).Replace("{Mode}", candidateDetails.Mode).Replace("{CandPosition}", candidateDetails.Skills).Replace("{InterviewDate}", candidateDetails.InterviewDateTime.Split(' ')[0]).Replace("{InterviewTime}", candidateDetails.InterviewDateTime.Split(' ')[1]).Replace("{ZoomUrl}", candidateDetails.ZoomUrl).Replace("{MeetingId}", candidateDetails.MeettingId).Replace("{PassCode}", candidateDetails.PassCode);
+            candidateDetails.CandidateDescription = candidateDetails.CandidateDescription.Replace("{CandName}", candidateDetails.Name).Replace("{Mode}", candidateDetails.Mode).Replace("{CandPosition}", candidateDetails.Skills).Replace("{InterviewDate}", candidateDetails.InterviewDateTime.Split(' ')[0]).Replace("{InterviewTime}", candidateDetails.InterviewDateTime.Split(' ')[1]).Replace("{ZoomUrl}", candidateDetails.ZoomUrl).Replace("{MeetingId}", candidateDetails.MeettingId).Replace("{PassCode}", candidateDetails.PassCode).Replace("{Note}",candidateDetails.Note).Replace("{Details}",candidateDetails.Details);
 
             Event body = new Event();
            
