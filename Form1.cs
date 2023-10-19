@@ -28,6 +28,8 @@ namespace InterViewScheduler
         private string InterviewerEmail;
         private string DefaultInterViewerColorCode = "1";
         private int indexRow;
+        private string Note;
+        private string Details;
 
         CandidateDetails candidateDetails = new CandidateDetails();
         public Form1()
@@ -98,7 +100,8 @@ namespace InterViewScheduler
                 candidateDetails.Email = txtCandEmail.Text;
                 candidateDetails.Mobile = txtCondMobile.Text;
                 candidateDetails.Skills = txtSkills.Text;
-                candidateDetails.Mode = ModeOfInterview.GetItemText(ModeOfInterview.SelectedItem);
+               
+                //candidateDetails.Mode = ModeOfInterview.GetItemText(ModeOfInterview.SelectedItem);
                 candidateDetails.Location = ((InterViewScheduler.Locations)cmbLocation.SelectedItem).Location;
                 //CultureInfo culture = new CultureInfo("en-US")
                 candidateDetails.LastWorkingDate = dtpLWD.Text;
@@ -118,6 +121,18 @@ namespace InterViewScheduler
 
                 candidateDetails.CandidateDescription = ((InterViewScheduler.Template)cmbRounds.SelectedItem).CandidateDescription;
                 candidateDetails.InterViewerDescription = ((InterViewScheduler.Template)cmbRounds.SelectedItem).InterViewerDescription;
+                if (ModeOfInterview.GetItemText(ModeOfInterview.SelectedItem) == "Virtual")
+                {
+                    candidateDetails.Mode = "I am thrilled to invite you for a job interview via Google Meet so that we can get to know you better.";
+                    candidateDetails.Note = "Note:\r\nTry to log in 10 min prior to the scheduled time.\r\nMake sure you are joining the Google Meet link from the Laptop / Desktop only. It will be required to share your screen.\r\nIt's a video call so make sure your webcam is working and it's ON during the interview.\r\nAlso, make sure Visual Studio / Net Beans / Eclipse is installed on your laptop as it's a technical round. So you will need to do some coding on it.\r\nKindly recheck your Webcam, Mic (Headphones), and Audio (Speaker) of your Laptop / Desktop before you start the interview. If you are logging in from Desktop simultaneously connect from Mobile too for Audio and Video.\r\nIf you get disconnected in between/after 40min kindly rejoin by using the same link.\r\n\r\nIn preparation for your interview, I encourage you to read more about WonderBiz's core values and Benefits. They are the foundation of who we are and how we support each other and our clients. The people you'll be meeting with are looking for candidates who can demonstrate these values. You'll also want to prepare a list of questions for each person you're meeting with to better evaluate if this is a good fit for you.\r\n\r\nVisit Us: www.wonderbizglobal.com\r\nLinkedIn:\r\nhttps://www.linkedin.com/company/wonderbiz-technologies\r\nAlso if you can give Quick Feedback before your Interview:\r\nhttps://forms.gle/AvKx169SDUsxztRE9\r\n\r\nThanks, and good luck with your interview!";
+                    candidateDetails.Details = "Below are the details for your video interview. Take a look, and if you have any ques https://accounts.google.com/b/0/AddMailServicetions, don't hesitate to reply to this email.";
+                }
+                else
+                {
+                    candidateDetails.Mode = "I am thrilled to invite you for a a F2F discussion so that we can get to know you better.";
+                    candidateDetails.Details = "Interview Venue:\r\nWonderBiz Technologies Pvt Ltd.\r\n311/312, Orion Business Park,\r\nNear Kapurbaudi Junction,\r\nGhodbunder Road, \r\nThane-400607";
+                    candidateDetails.Note = "Map Link: https://g.page/WonderBiz_Technologies?share\r\nLandmark: Beside Wonder Mall\r\nPlease reply to confirm that this date and time still work for you. \r\nIn preparation for your interview, I encourage you to read more about WonderBiz’s core values and Benefits. They are the foundation of who we are and how we support each other and our clients. The people you’ll be meeting with are looking for candidates who can demonstrate these values. You’ll also want to prepare a list of questions for each person you’re meeting with to better evaluate if this is a good fit for you. \r\nVisit Us: www.wonderbizglobal.com\r\nLinkedIn: https://www.linkedin.com/company/wonderbiz-technologies\r\nAlso if you can give a Quick Feedback before your Interview:\r\nhttps://forms.gle/AvKx169SDUsxztRE9\r\n\r\nThanks, and good luck with your interview!";
+                }
                 if (candidateDetails.InterViewRound == "1st Round Interview")
                 {
                     candidateDetails.Summary = "Invitation for the first round interview with WonderBiz for the " + candidateDetails.Skills;
@@ -153,6 +168,7 @@ namespace InterViewScheduler
                         candidateDetails.ResumeLink = txtResumeLink.Text;
                     }
                     /*End Upload Files*/
+                  
 
 
                     using (StreamReader r = new StreamReader("Details.json"))

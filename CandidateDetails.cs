@@ -20,6 +20,9 @@ namespace CalendarQuickstart
         public string? Skills { get; set; }
 
         public string? Mode { get; set; }
+
+        public string? Details { get; set; }
+        public string? Note { get; set; }
         public string? Location { get; set; }
         public string? LastWorkingDate { get; set; }
         public string? SchedulersName { get; set; }
