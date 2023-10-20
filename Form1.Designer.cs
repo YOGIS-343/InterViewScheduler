@@ -328,6 +328,7 @@
             dtpInterviewDate.Name = "dtpInterviewDate";
             dtpInterviewDate.Size = new Size(106, 27);
             dtpInterviewDate.TabIndex = 9;
+            dtpInterviewDate.ValueChanged += dtpInterviewDate_ValueChanged;
             // 
             // dtpLWD
             // 
