@@ -16,10 +16,12 @@
 
   <ItemGroup>
     <PackageReference Include="ADGV" Version="0.1.0.10" />
+    <PackageReference Include="DataGridView-AutoFilter" Version="1.1.0" />
     <PackageReference Include="Google.Apis.Calendar.v3" Version="1.62.0.3171" />
     <PackageReference Include="Google.Apis.Drive.v3" Version="1.62.0.3155" />
     <PackageReference Include="Google.Apis.Sheets.v4" Version="1.62.0.3148" />
     <PackageReference Include="MongoDB.Bson" Version="2.21.0" />
+    <PackageReference Include="morelinq" Version="3.4.2" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="NUnit" Version="3.13.3" />
     <PackageReference Include="Syncfusion.Shared.Base" Version="23.1.40" />
@@ -129,6 +131,10 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Properties\DataSources\" />
   </ItemGroup>
 
   <ProjectExtensions><VisualStudio><UserProperties data_4status_1json__JsonSchema="https://cdn.jsdelivr.net/gh/roadrunner-server/roadrunner@latest/schemas/config/2.0.schema.json" /></VisualStudio></ProjectExtensions>
