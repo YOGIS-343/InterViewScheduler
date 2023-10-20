@@ -27,6 +27,7 @@ namespace InterViewScheduler
         private string SchedulerEmail;
         private string InterviewerEmail;
         private string DefaultInterViewerColorCode = "1";
+        private string Modeof;
         private int indexRow;
         private string Note;
         private string Details;
@@ -100,7 +101,7 @@ namespace InterViewScheduler
                 candidateDetails.Email = txtCandEmail.Text;
                 candidateDetails.Mobile = txtCondMobile.Text;
                 candidateDetails.Skills = txtSkills.Text;
-               
+
                 //candidateDetails.Mode = ModeOfInterview.GetItemText(ModeOfInterview.SelectedItem);
                 candidateDetails.Location = ((InterViewScheduler.Locations)cmbLocation.SelectedItem).Location;
                 //CultureInfo culture = new CultureInfo("en-US")
@@ -145,7 +146,7 @@ namespace InterViewScheduler
 
                 if (!IsAnyNullOrEmpty(candidateDetails))
                 {
-                    candidateDetails.GoogleMeetLink = txtGoogleMeetUrl.Text;
+                   candidateDetails.GoogleMeetLink = txtGoogleMeetUrl.Text;
 
                     if (cmbDuration.Text != "")
                     {
@@ -168,7 +169,7 @@ namespace InterViewScheduler
                         candidateDetails.ResumeLink = txtResumeLink.Text;
                     }
                     /*End Upload Files*/
-                  
+
 
 
                     using (StreamReader r = new StreamReader("Details.json"))
@@ -187,13 +188,13 @@ namespace InterViewScheduler
 
 
 
-
+                    Modeof = ModeOfInterview.GetItemText(ModeOfInterview.SelectedItem);
                     GoogleCalendarHelper googleCalendarHelper = new GoogleCalendarHelper(mailContaint.SpreadsheetId);
 
                     Event response = googleCalendarHelper.ScheduleCandidateInterview(candidateDetails);
-                    candidateDetails.Summary = txtCondName.Text + " - " + txtSkills.Text + " " + candidateDetails.Location + " @ " + cmbdtpInterviewTime.Text;
-                    candidateDetails.ZoomUrl = response.HangoutLink;
-                    candidateDetails.GoogleMeetLink = response.HangoutLink;
+                    candidateDetails.Summary = txtCondName.Text + " - " + txtSkills.Text + " "  + candidateDetails.Location  +  " @ " + cmbdtpInterviewTime.Text + " "+ "'" + Modeof + "'";
+                  candidateDetails.ZoomUrl = response.HangoutLink;
+                   candidateDetails.GoogleMeetLink = response.HangoutLink;
 
 
                     GoogleSheetsHelper googleSheetsHelper = new GoogleSheetsHelper(mailContaint.SpreadsheetId);
@@ -476,7 +477,7 @@ namespace InterViewScheduler
             */
 
 
-            
+
             using (StreamReader r = new StreamReader("Details.json"))
             {
                 string json = r.ReadToEnd();
@@ -748,6 +749,9 @@ namespace InterViewScheduler
 
         }
 
+        private void dtpInterviewDate_ValueChanged(object sender, EventArgs e)
+        {
 
+        }
     }
 }

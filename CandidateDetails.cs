@@ -19,10 +19,7 @@ namespace CalendarQuickstart
         public string? Email { get; set; }
         public string? Skills { get; set; }
 
-        public string? Mode { get; set; }
-
-        public string? Details { get; set; }
-        public string? Note { get; set; }
+      
         public string? Location { get; set; }
         public string? LastWorkingDate { get; set; }
         public string? SchedulersName { get; set; }
@@ -51,6 +48,11 @@ namespace CalendarQuickstart
         public string? RecordType { get; set; } = "New Record";
         public string? ColorCode { get; set; } = "1";
         public string? InterViewerColorCode { get; set; } = "1";
+
+        public string? Mode { get; set; }
+
+        public string? Details { get; set; }
+        public string? Note { get; set; }
 
 
 
