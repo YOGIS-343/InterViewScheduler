@@ -76,6 +76,7 @@
             label1 = new Label();
             groupBox2 = new GroupBox();
             dgvCandList = new DataGridView();
+            candidateDetailsBindingSource = new BindingSource(components);
             txtSearch = new TextBox();
             btnSearch = new Button();
             openFileDialog1 = new OpenFileDialog();
@@ -87,6 +88,7 @@
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvCandList).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)candidateDetailsBindingSource).BeginInit();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -544,6 +546,10 @@
             dgvCandList.CellClick += dgvCandList_CellClick;
             dgvCandList.CellDoubleClick += dgvCandList_CellDoubleClick;
             // 
+            // candidateDetailsBindingSource
+            // 
+            candidateDetailsBindingSource.DataSource = typeof(CalendarQuickstart.CandidateDetails);
+            // 
             // txtSearch
             // 
             txtSearch.Location = new Point(849, 372);
@@ -624,6 +630,7 @@
             groupBox1.PerformLayout();
             groupBox2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dgvCandList).EndInit();
+            ((System.ComponentModel.ISupportInitialize)candidateDetailsBindingSource).EndInit();
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
             ResumeLayout(false);
@@ -686,5 +693,7 @@
         public Button btn_delete;
         private ComboBox ModeOfInterview;
         private Label label16;
+        private DataGridViewTextBoxColumn modeofInterViewDataGridViewTextBoxColumn;
+        private BindingSource candidateDetailsBindingSource;
     }
 }
