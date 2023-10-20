@@ -50,5 +50,9 @@ namespace CalendarQuickstart
 
         public string? Mode { get; set; }
 
+        public string? Details { get; set; }
+        public string? Note { get; set; }
+
+
     }
 }
