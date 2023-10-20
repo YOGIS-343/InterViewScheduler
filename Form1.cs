@@ -1,10 +1,14 @@
 using CalendarQuickstart;
+using DataGridViewAutoFilter;
 using Google.Apis.Calendar.v3.Data;
 using Google.Apis.Drive.v3.Data;
+using MoreLinq;
 //using MongoDB.Bson.IO;
 using Newtonsoft.Json;
 using NUnit.Framework.Internal.Execution;
+using System.ComponentModel;
 using System.Data;
+using System.Data.Common;
 using System.Globalization;
 using System.Net;
 using System.Reflection;
@@ -13,6 +17,7 @@ using System.Text;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using Event = Google.Apis.Calendar.v3.Data.Event;
+using DataGridViewAutoFilter;
 
 namespace InterViewScheduler
 {
@@ -29,10 +34,18 @@ namespace InterViewScheduler
         private string DefaultInterViewerColorCode = "1";
         private string Modeof;
         private int indexRow;
-        private string Note;
-        private string Details;
+        private BindingSource bindingSource;
+
 
         CandidateDetails candidateDetails = new CandidateDetails();
+
+
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
         public Form1()
         {
             try
@@ -49,6 +62,9 @@ namespace InterViewScheduler
             }
             catch (Exception ex)
             { MessageBox.Show(ex.Message); }
+
+            bindingSource = new BindingSource();
+            dgvCandList.DataSource = bindingSource;
         }
 
         private void OnShown(object sender, EventArgs e)
@@ -74,10 +90,41 @@ namespace InterViewScheduler
             //var gsp = new GoogleSheetParameters() { RangeColumnStart, RangeRowStart = 1, RangeColumnEnd = 12, RangeRowEnd = 100, FirstRowIsHeaders = true, SheetName = "sheet1" };
 
             DataTable dataTable = googleSheetsHelper.ToDataTable(googleSheetsHelper.GetDataFromSheet(gsp));
-            dgvCandList.DataSource = dataTable;
+            //dgvCandList.DataSource = dataTable;
 
+       
+            
+            
+            AddAutoFilterColumn("Id", "Id");
+            AddAutoFilterColumn("Name", "Name");
+            AddAutoFilterColumn("Mobile", "Mobile");
+            AddAutoFilterColumn("Email", "Email");
+            AddAutoFilterColumn("Skills", "Skills");
+            AddAutoFilterColumn("Location", "Location");
+            AddAutoFilterColumn("LastWorkingDate", "LastWorkingDate");
+            AddAutoFilterColumn("SchedulersName", "SchedulersName");
+            AddAutoFilterColumn("CreatedDate", "CreatedDate");
+            AddAutoFilterColumn("InterViewStatus", "InterViewStatus");
+            AddAutoFilterColumn("Comment", "Comment");
+            AddAutoFilterColumn("InterViewRound", "InterViewRound");
+            AddAutoFilterColumn("InterviewDateTime", "InterviewDateTime");
+            AddAutoFilterColumn("InterViewerName", "InterViewerName");
+            AddAutoFilterColumn("Attendes", "Attendes");
+            AddAutoFilterColumn("ResumeLink", "ResumeLink");
+            AddAutoFilterColumn("FeedbackLink", "FeedbackLink");
+            AddAutoFilterColumn("Duration", "Duration");
+            AddAutoFilterColumn("GoogleMeetLink", "GoogleMeetLink");
+
+            bindingSource.DataSource = dataTable.Copy();
         }
 
+        private void AddAutoFilterColumn(string columnName, string dataPropertyName)
+        {
+            DataGridViewAutoFilterTextBoxColumn column = new DataGridViewAutoFilterTextBoxColumn();
+            column.DataPropertyName = dataPropertyName;
+            column.HeaderText = columnName;
+            dgvCandList.Columns.Add(column);
+        }
         private void btnSchedule_Click(object sender, EventArgs e)
         {
 
@@ -477,7 +524,7 @@ namespace InterViewScheduler
             */
 
 
-
+            
             using (StreamReader r = new StreamReader("Details.json"))
             {
                 string json = r.ReadToEnd();
@@ -486,10 +533,10 @@ namespace InterViewScheduler
                 r.Close();
             }
 
-            GoogleSheetsHelper googleSheetsHelper = new GoogleSheetsHelper(mailContaint.SpreadsheetId);
+                        GoogleSheetsHelper googleSheetsHelper = new GoogleSheetsHelper(mailContaint.SpreadsheetId);
 
-            DataTable dt = googleSheetsHelper.ToDataTable(googleSheetsHelper.GetDataFromSheet(gsp));
-
+                        DataTable dt = googleSheetsHelper.ToDataTable(googleSheetsHelper.GetDataFromSheet(gsp));
+            
 
 
             string searchTerm = Convert.ToString(txtSearch.Text);
@@ -506,8 +553,10 @@ namespace InterViewScheduler
             }
 
 
-        }
 
+
+
+        }
 
 
 
@@ -714,10 +763,11 @@ namespace InterViewScheduler
                 txtFeedbackLink.Text = row.Cells[16].Value.ToString();
                 cmbDuration.Text = row.Cells[17].Value.ToString();
                 txtGoogleMeetUrl.Text = row.Cells[18].Value.ToString();
+
             }
             catch
             {
-                MessageBox.Show("Invalid cell");
+               // MessageBox.Show("Invalid cell");
             }
 
 
@@ -726,28 +776,27 @@ namespace InterViewScheduler
 
         private void btn_Delete_Click(object sender, EventArgs e)
         {
-
-            dgvCandList.Rows.RemoveAt(this.dgvCandList.SelectedRows[0].Index);
+            /*
+                        dgvCandList.Rows.RemoveAt(this.dgvCandList.SelectedRows[0].Index);
+                        DialogResult result = MessageBox.Show("Do you want to delete this candidate details?", "Delete", MessageBoxButtons.YesNo);
+                        MessageBox.Show("Candidate Details Deleted Suceessfully");
+            */
             DialogResult result = MessageBox.Show("Do you want to delete this candidate details?", "Delete", MessageBoxButtons.YesNo);
-            MessageBox.Show("Candidate Details Deleted Suceessfully");
-
-            /* DialogResult result = MessageBox.Show("Do you want to delete this candidate details?", "Delete", MessageBoxButtons.YesNo);
-             if (result == DialogResult.Yes)
-             {
-                 if (this.dgvCandList.SelectedRows.Count > 0)
-                 {
-                     dgvCandList.Rows.RemoveAt(this.dgvCandList.SelectedRows[0].Index);
-                 }
-                 MessageBox.Show("Candidate Details Deleted Suceessfully");
-             }*/
+            if (result == DialogResult.Yes)
+            {
+                if (this.dgvCandList.SelectedRows.Count > 0)
+                {
+                    dgvCandList.Rows.RemoveAt(this.dgvCandList.SelectedRows[0].Index);
+                }
+                MessageBox.Show("Candidate Details Deleted Suceessfully");
+            }
 
         }
 
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
 
-        }
+
+
 
         private void dtpInterviewDate_ValueChanged(object sender, EventArgs e)
         {
