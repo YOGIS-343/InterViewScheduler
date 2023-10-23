@@ -89,22 +89,24 @@ namespace InterViewScheduler
                 attendes.Add(a);
             }
 
-            body.ConferenceData = new ConferenceData
+            if (candidateDetails.GBody == "Virtual")
             {
-                CreateRequest = new CreateConferenceRequest
+                body.ConferenceData = new ConferenceData
                 {
-                    //RequestId = "1234abcdef",
-                    RequestId = DateTime.Now.ToString("yyyy-dd-M--HH-mm-ss"),
-                    ConferenceSolutionKey = new ConferenceSolutionKey
+                    CreateRequest = new CreateConferenceRequest
                     {
-                        Type = "hangoutsMeet"
+                        //RequestId = "1234abcdef",
+                        RequestId = DateTime.Now.ToString("yyyy-dd-M--HH-mm-ss"),
+                        ConferenceSolutionKey = new ConferenceSolutionKey
+                        {
+                            Type = "hangoutsMeet"
+                        },
+                        Status = new ConferenceRequestStatus
+                        {
+                            StatusCode = "success"
+                        }
                     },
-                    Status = new ConferenceRequestStatus
-                    {
-                        StatusCode = "success"
-                    }
-                },
-                EntryPoints = new List<EntryPoint>
+                    EntryPoints = new List<EntryPoint>
                     {
                         new EntryPoint
                         {
@@ -113,19 +115,19 @@ namespace InterViewScheduler
                             Label = ""
                         }
                     },
-                ConferenceSolution = new ConferenceSolution
-                {
-                    Key = new ConferenceSolutionKey
+                    ConferenceSolution = new ConferenceSolution
                     {
-                        Type = "hangoutsMeet"
+                        Key = new ConferenceSolutionKey
+                        {
+                            Type = "hangoutsMeet"
+                        },
+                        Name = "Google Meet",
+                        IconUri = ""
                     },
-                    Name = "Google Meet",
-                    IconUri = ""
-                },
-                ConferenceId = ""
-            };
+                    ConferenceId = ""
+                };
 
-
+            }
 
 
             EventAttendee b = new EventAttendee();
