@@ -32,9 +32,9 @@ namespace InterViewScheduler
         private string SchedulerEmail;
         private string InterviewerEmail;
         private string DefaultInterViewerColorCode = "1";
-        private string Modeof;
         private int indexRow;
         private BindingSource bindingSource;
+        public string Modeof;
 
 
         CandidateDetails candidateDetails = new CandidateDetails();
@@ -43,6 +43,7 @@ namespace InterViewScheduler
 
         private void Form1_Load(object sender, EventArgs e)
         {
+             ModeOfInterview.SelectedIndex = 0;
 
         }
 
@@ -92,9 +93,9 @@ namespace InterViewScheduler
             DataTable dataTable = googleSheetsHelper.ToDataTable(googleSheetsHelper.GetDataFromSheet(gsp));
             //dgvCandList.DataSource = dataTable;
 
-       
-            
-            
+
+
+
             AddAutoFilterColumn("Id", "Id");
             AddAutoFilterColumn("Name", "Name");
             AddAutoFilterColumn("Mobile", "Mobile");
@@ -131,6 +132,7 @@ namespace InterViewScheduler
             try
             {
                 // Set cursor as hourglass
+                Modeof = ModeOfInterview.GetItemText(ModeOfInterview.SelectedItem);
                 Cursor.Current = Cursors.WaitCursor;
 
                 if (EditedRowId > 0)
@@ -166,11 +168,22 @@ namespace InterViewScheduler
                 candidateDetails.PassCode = ((InterViewScheduler.Interviewers)cmbInterviewerNames.SelectedItem).PassCode;
                 candidateDetails.MeettingId = ((InterViewScheduler.Interviewers)cmbInterviewerNames.SelectedItem).MeettingId;
                 candidateDetails.InterViewStatus = ((InterViewScheduler.FinalStatus)cmbStatus.SelectedItem).Status;
-
+                candidateDetails.GBody = ModeOfInterview.GetItemText(ModeOfInterview.SelectedItem);
                 candidateDetails.CandidateDescription = ((InterViewScheduler.Template)cmbRounds.SelectedItem).CandidateDescription;
                 candidateDetails.InterViewerDescription = ((InterViewScheduler.Template)cmbRounds.SelectedItem).InterViewerDescription;
+
+                if (candidateDetails.InterViewRound == "1st Round Interview")
+                {
+                    candidateDetails.Summary = "Invitation for the first round interview with WonderBiz for the " + candidateDetails.Skills;
+                }
+                else
+                {
+                    candidateDetails.Summary = "Invitation for the second round interview with WonderBiz for the " + candidateDetails.Skills;
+                }
+
                 if (ModeOfInterview.GetItemText(ModeOfInterview.SelectedItem) == "Virtual")
                 {
+                    candidateDetails.GoogleMeetLink = "GoogleMeetLink";
                     candidateDetails.Mode = "I am thrilled to invite you for a job interview via Google Meet so that we can get to know you better.";
                     candidateDetails.Note = "Note:\r\nTry to log in 10 min prior to the scheduled time.\r\nMake sure you are joining the Google Meet link from the Laptop / Desktop only. It will be required to share your screen.\r\nIt's a video call so make sure your webcam is working and it's ON during the interview.\r\nAlso, make sure Visual Studio / Net Beans / Eclipse is installed on your laptop as it's a technical round. So you will need to do some coding on it.\r\nKindly recheck your Webcam, Mic (Headphones), and Audio (Speaker) of your Laptop / Desktop before you start the interview. If you are logging in from Desktop simultaneously connect from Mobile too for Audio and Video.\r\nIf you get disconnected in between/after 40min kindly rejoin by using the same link.\r\n\r\nIn preparation for your interview, I encourage you to read more about WonderBiz's core values and Benefits. They are the foundation of who we are and how we support each other and our clients. The people you'll be meeting with are looking for candidates who can demonstrate these values. You'll also want to prepare a list of questions for each person you're meeting with to better evaluate if this is a good fit for you.\r\n\r\nVisit Us: www.wonderbizglobal.com\r\nLinkedIn:\r\nhttps://www.linkedin.com/company/wonderbiz-technologies\r\nAlso if you can give Quick Feedback before your Interview:\r\nhttps://forms.gle/AvKx169SDUsxztRE9\r\n\r\nThanks, and good luck with your interview!";
                     candidateDetails.Details = "Below are the details for your video interview. Take a look, and if you have any ques https://accounts.google.com/b/0/AddMailServicetions, don't hesitate to reply to this email.";
@@ -181,19 +194,12 @@ namespace InterViewScheduler
                     candidateDetails.Details = "Interview Venue:\r\nWonderBiz Technologies Pvt Ltd.\r\n311/312, Orion Business Park,\r\nNear Kapurbaudi Junction,\r\nGhodbunder Road, \r\nThane-400607";
                     candidateDetails.Note = "Map Link: https://g.page/WonderBiz_Technologies?share\r\nLandmark: Beside Wonder Mall\r\nPlease reply to confirm that this date and time still work for you. \r\nIn preparation for your interview, I encourage you to read more about WonderBiz’s core values and Benefits. They are the foundation of who we are and how we support each other and our clients. The people you’ll be meeting with are looking for candidates who can demonstrate these values. You’ll also want to prepare a list of questions for each person you’re meeting with to better evaluate if this is a good fit for you. \r\nVisit Us: www.wonderbizglobal.com\r\nLinkedIn: https://www.linkedin.com/company/wonderbiz-technologies\r\nAlso if you can give a Quick Feedback before your Interview:\r\nhttps://forms.gle/AvKx169SDUsxztRE9\r\n\r\nThanks, and good luck with your interview!";
                 }
-                if (candidateDetails.InterViewRound == "1st Round Interview")
-                {
-                    candidateDetails.Summary = "Invitation for the first round interview with WonderBiz for the " + candidateDetails.Skills;
-                }
-                else
-                {
-                    candidateDetails.Summary = "Invitation for the second round interview with WonderBiz for the " + candidateDetails.Skills;
-                }
+
                 candidateDetails.Attendes = txtAttendes.Text;
 
                 if (!IsAnyNullOrEmpty(candidateDetails))
                 {
-                   candidateDetails.GoogleMeetLink = txtGoogleMeetUrl.Text;
+                    candidateDetails.GoogleMeetLink = txtGoogleMeetUrl.Text;
 
                     if (cmbDuration.Text != "")
                     {
@@ -235,13 +241,13 @@ namespace InterViewScheduler
 
 
 
-                    Modeof = ModeOfInterview.GetItemText(ModeOfInterview.SelectedItem);
+
                     GoogleCalendarHelper googleCalendarHelper = new GoogleCalendarHelper(mailContaint.SpreadsheetId);
 
                     Event response = googleCalendarHelper.ScheduleCandidateInterview(candidateDetails);
-                    candidateDetails.Summary = txtCondName.Text + " - " + txtSkills.Text + " "  + candidateDetails.Location  +  " @ " + cmbdtpInterviewTime.Text + " "+ "'" + Modeof + "'";
-                  candidateDetails.ZoomUrl = response.HangoutLink;
-                   candidateDetails.GoogleMeetLink = response.HangoutLink;
+                    candidateDetails.Summary = txtCondName.Text + " - " + txtSkills.Text + " " + candidateDetails.Location + " @ " + cmbdtpInterviewTime.Text + " " + "'" + Modeof + "'";
+                    candidateDetails.ZoomUrl = response.HangoutLink;
+                    candidateDetails.GoogleMeetLink = response.HangoutLink;
 
 
                     GoogleSheetsHelper googleSheetsHelper = new GoogleSheetsHelper(mailContaint.SpreadsheetId);
@@ -303,38 +309,45 @@ namespace InterViewScheduler
 
         private void dgvCandList_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0)
+            try
             {
-                var dataIndexNo = dgvCandList.Rows[e.RowIndex].Index.ToString();
-                EditedRowId = Convert.ToInt32(dgvCandList.Rows[e.RowIndex].Cells[0].Value.ToString());
-                txtCondName.Text = dgvCandList.Rows[e.RowIndex].Cells[1].Value.ToString();
-                txtCondMobile.Text = dgvCandList.Rows[e.RowIndex].Cells[2].Value.ToString();
-                txtCandEmail.Text = dgvCandList.Rows[e.RowIndex].Cells[3].Value.ToString();
-                txtSkills.Text = dgvCandList.Rows[e.RowIndex].Cells[4].Value.ToString();
-                cmbLocation.SelectedItem = (cmbLocation.DataSource as List<Locations>).First(x => x.Location.Equals(dgvCandList.Rows[e.RowIndex].Cells[5].Value.ToString()));
-                dtpLWD.Text = Convert.ToDateTime(dgvCandList.Rows[e.RowIndex].Cells[6].Value.ToString(), CultureInfo.InvariantCulture).ToString();
-                cmbSchedulers.SelectedItem = (cmbSchedulers.DataSource as List<Schedulers>).First(x => x.Name.Equals(dgvCandList.Rows[e.RowIndex].Cells[7].Value.ToString()));
-                cmbStatus.SelectedItem = (cmbStatus.DataSource as List<FinalStatus>).First(x => x.Status.Equals(dgvCandList.Rows[e.RowIndex].Cells[9].Value.ToString()));
-                txtRemark.Text = dgvCandList.Rows[e.RowIndex].Cells[10].Value.ToString();
-                cmbRounds.SelectedItem = (cmbRounds.DataSource as List<Template>).First(x => x.Id.Equals(dgvCandList.Rows[e.RowIndex].Cells[11].Value.ToString()));
-                DateTime dt = Convert.ToDateTime(dgvCandList.Rows[e.RowIndex].Cells[12].Value.ToString(), CultureInfo.InvariantCulture); ;
-                String time12 = dt.ToString("h:mm tt", CultureInfo.InvariantCulture);
-                dtpInterviewDate.Text = Convert.ToDateTime(dgvCandList.Rows[e.RowIndex].Cells[12].Value.ToString().Split(' ')[0].ToString(), CultureInfo.InvariantCulture).ToString();
-                cmbdtpInterviewTime.Text = time12;
-                cmbInterviewerNames.SelectedItem = (cmbInterviewerNames.DataSource as List<Interviewers>).First(x => x.Name.Equals(dgvCandList.Rows[e.RowIndex].Cells[13].Value.ToString()));
-                txtAttendes.Text = dgvCandList.Rows[e.RowIndex].Cells[14].Value.ToString();
-                txtResumeLink.Text = dgvCandList.Rows[e.RowIndex].Cells[15].Value.ToString();
-                txtFeedbackLink.Text = dgvCandList.Rows[e.RowIndex].Cells[16].Value.ToString();
-                cmbDuration.Text = dgvCandList.Rows[e.RowIndex].Cells[17].Value.ToString();
-                if (dgvCandList.Rows[e.RowIndex].Cells[18].Value.ToString() == "")
+                if (e.RowIndex >= 0)
                 {
-                    txtGoogleMeetUrl.Text = "GoogleMeetLink";
-                }
-                else
-                {
-                    txtGoogleMeetUrl.Text = dgvCandList.Rows[e.RowIndex].Cells[18].Value.ToString();
-                }
+                    var dataIndexNo = dgvCandList.Rows[e.RowIndex].Index.ToString();
+                    EditedRowId = Convert.ToInt32(dgvCandList.Rows[e.RowIndex].Cells[0].Value.ToString());
+                    txtCondName.Text = dgvCandList.Rows[e.RowIndex].Cells[1].Value.ToString();
+                    txtCondMobile.Text = dgvCandList.Rows[e.RowIndex].Cells[2].Value.ToString();
+                    txtCandEmail.Text = dgvCandList.Rows[e.RowIndex].Cells[3].Value.ToString();
+                    txtSkills.Text = dgvCandList.Rows[e.RowIndex].Cells[4].Value.ToString();
+                    cmbLocation.SelectedItem = (cmbLocation.DataSource as List<Locations>).First(x => x.Location.Equals(dgvCandList.Rows[e.RowIndex].Cells[5].Value.ToString()));
+                    dtpLWD.Text = Convert.ToDateTime(dgvCandList.Rows[e.RowIndex].Cells[6].Value.ToString(), CultureInfo.InvariantCulture).ToString();
+                    cmbSchedulers.SelectedItem = (cmbSchedulers.DataSource as List<Schedulers>).First(x => x.Name.Equals(dgvCandList.Rows[e.RowIndex].Cells[7].Value.ToString()));
+                    cmbStatus.SelectedItem = (cmbStatus.DataSource as List<FinalStatus>).First(x => x.Status.Equals(dgvCandList.Rows[e.RowIndex].Cells[9].Value.ToString()));
+                    txtRemark.Text = dgvCandList.Rows[e.RowIndex].Cells[10].Value.ToString();
+                    cmbRounds.SelectedItem = (cmbRounds.DataSource as List<Template>).First(x => x.Id.Equals(dgvCandList.Rows[e.RowIndex].Cells[11].Value.ToString()));
+                    DateTime dt = Convert.ToDateTime(dgvCandList.Rows[e.RowIndex].Cells[12].Value.ToString(), CultureInfo.InvariantCulture); ;
+                    String time12 = dt.ToString("h:mm tt", CultureInfo.InvariantCulture);
+                    dtpInterviewDate.Text = Convert.ToDateTime(dgvCandList.Rows[e.RowIndex].Cells[12].Value.ToString().Split(' ')[0].ToString(), CultureInfo.InvariantCulture).ToString();
+                    cmbdtpInterviewTime.Text = time12;
+                    cmbInterviewerNames.SelectedItem = (cmbInterviewerNames.DataSource as List<Interviewers>).First(x => x.Name.Equals(dgvCandList.Rows[e.RowIndex].Cells[13].Value.ToString()));
+                    txtAttendes.Text = dgvCandList.Rows[e.RowIndex].Cells[14].Value.ToString();
+                    txtResumeLink.Text = dgvCandList.Rows[e.RowIndex].Cells[15].Value.ToString();
+                    txtFeedbackLink.Text = dgvCandList.Rows[e.RowIndex].Cells[16].Value.ToString();
+                    cmbDuration.Text = dgvCandList.Rows[e.RowIndex].Cells[17].Value.ToString();
+                    if (dgvCandList.Rows[e.RowIndex].Cells[18].Value.ToString() == "")
+                    {
+                        txtGoogleMeetUrl.Text = "GoogleMeetLink";
+                    }
+                    else
+                    {
+                        txtGoogleMeetUrl.Text = dgvCandList.Rows[e.RowIndex].Cells[18].Value.ToString();
+                    }
 
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Select the proper cell");
             }
         }
 
@@ -486,78 +499,78 @@ namespace InterViewScheduler
             }
         }
 
-        private void btnSearch_Click(object sender, EventArgs e)
-        {
-            //using (StreamReader r = new StreamReader("Details.json"))
-            //{
-            //    string json = r.ReadToEnd();
-            //    mailContaint = JsonConvert.DeserializeObject<MailContaint>(json);
-            //    gsp = JsonConvert.DeserializeObject<GoogleSheetParameters>(json);
-            //    r.Close();
-            //}
-            //GoogleSheetsHelper googleSheetsHelper = new GoogleSheetsHelper(mailContaint.SpreadsheetId);
-            ////var gsp = new GoogleSheetParameters() { RangeColumnStart, RangeRowStart = 1, RangeColumnEnd = 12, RangeRowEnd = 100, FirstRowIsHeaders = true, SheetName = "sheet1" };
-            //DataTable dt = googleSheetsHelper.ToDataTable(googleSheetsHelper.GetDataFromSheet(gsp));
-            //// DataTable fdt = dt.Select("[Name Of Candidate] LIKE '%" + txtSearch.Text + "%' OR [Location] LIKE '%" + txtSearch.Text + "%'").CopyToDataTable();
-            //DataTable fdt = new DataTable();
-            //foreach (DataRow dr in drs)
-            //{
-            //    fdt.Rows.Add(dr);
-            // }
-            //fdt.AcceptChanges();
-            //dgvCandList.DataSource = fdt;
-            /*
-                        string CadName = Convert.ToString(txtSearch.Text);
-                        (dgvCandList.DataSource as DataTable).DefaultView.RowFilter = String.Format("Name like '%" + CadName + "%'");
+        /*  private void btnSearch_Click(object sender, EventArgs e)
+          {
+              //using (StreamReader r = new StreamReader("Details.json"))
+              //{
+              //    string json = r.ReadToEnd();
+              //    mailContaint = JsonConvert.DeserializeObject<MailContaint>(json);
+              //    gsp = JsonConvert.DeserializeObject<GoogleSheetParameters>(json);
+              //    r.Close();
+              //}
+              //GoogleSheetsHelper googleSheetsHelper = new GoogleSheetsHelper(mailContaint.SpreadsheetId);
+              ////var gsp = new GoogleSheetParameters() { RangeColumnStart, RangeRowStart = 1, RangeColumnEnd = 12, RangeRowEnd = 100, FirstRowIsHeaders = true, SheetName = "sheet1" };
+              //DataTable dt = googleSheetsHelper.ToDataTable(googleSheetsHelper.GetDataFromSheet(gsp));
+              //// DataTable fdt = dt.Select("[Name Of Candidate] LIKE '%" + txtSearch.Text + "%' OR [Location] LIKE '%" + txtSearch.Text + "%'").CopyToDataTable();
+              //DataTable fdt = new DataTable();
+              //foreach (DataRow dr in drs)
+              //{
+              //    fdt.Rows.Add(dr);
+              // }
+              //fdt.AcceptChanges();
+              //dgvCandList.DataSource = fdt;
+              *//*
+                          string CadName = Convert.ToString(txtSearch.Text);
+                          (dgvCandList.DataSource as DataTable).DefaultView.RowFilter = String.Format("Name like '%" + CadName + "%'");
 
-                         string CadLocation = Convert.ToString(txtSearch.Text);
-                        (dgvCandList.DataSource as DataTable).DefaultView.RowFilter = String.Format("Location like '%" + CadLocation + "%'");
-
-
-                        string CadSkill = Convert.ToString(txtSearch.Text);
-                        (dgvCandList.DataSource as DataTable).DefaultView.RowFilter = String.Format("Skills like '%" + CadSkill + "%'");
+                           string CadLocation = Convert.ToString(txtSearch.Text);
+                          (dgvCandList.DataSource as DataTable).DefaultView.RowFilter = String.Format("Location like '%" + CadLocation + "%'");
 
 
-                        string CadInterviewDateTime = Convert.ToString(txtSearch.Text);
-                        (dgvCandList.DataSource as DataTable).DefaultView.RowFilter = String.Format("InterviewDateTime like '%" + CadInterviewDateTime + "%'");
-
-            */
+                          string CadSkill = Convert.ToString(txtSearch.Text);
+                          (dgvCandList.DataSource as DataTable).DefaultView.RowFilter = String.Format("Skills like '%" + CadSkill + "%'");
 
 
-            
-            using (StreamReader r = new StreamReader("Details.json"))
-            {
-                string json = r.ReadToEnd();
-                mailContaint = JsonConvert.DeserializeObject<MailContaint>(json);
-                gsp = JsonConvert.DeserializeObject<GoogleSheetParameters>(json);
-                r.Close();
-            }
+                          string CadInterviewDateTime = Convert.ToString(txtSearch.Text);
+                          (dgvCandList.DataSource as DataTable).DefaultView.RowFilter = String.Format("InterviewDateTime like '%" + CadInterviewDateTime + "%'");
 
-                        GoogleSheetsHelper googleSheetsHelper = new GoogleSheetsHelper(mailContaint.SpreadsheetId);
-
-                        DataTable dt = googleSheetsHelper.ToDataTable(googleSheetsHelper.GetDataFromSheet(gsp));
-            
-
-
-            string searchTerm = Convert.ToString(txtSearch.Text);
-
-            DataView dv = (dgvCandList.DataSource as DataTable).DefaultView;
-
-            // Reset the filter before applying a new one
-            dv.RowFilter = string.Empty;
-
-            if (!string.IsNullOrEmpty(searchTerm))
-            {
-                // Use "OR" to search in either column
-                dv.RowFilter = $"Name like '%{searchTerm}%' OR Location like '%{searchTerm}%' OR Skills like '%{searchTerm}%' OR InterviewDateTime like '%{searchTerm}%' OR SchedulersName like '%{searchTerm}%' OR InterViewStatus like '%{searchTerm}%' OR InterViewRound like '%{searchTerm}%' OR InterViewerName like '%{searchTerm}%'";
-            }
+              *//*
 
 
 
+              using (StreamReader r = new StreamReader("Details.json"))
+              {
+                  string json = r.ReadToEnd();
+                  mailContaint = JsonConvert.DeserializeObject<MailContaint>(json);
+                  gsp = JsonConvert.DeserializeObject<GoogleSheetParameters>(json);
+                  r.Close();
+              }
+
+              GoogleSheetsHelper googleSheetsHelper = new GoogleSheetsHelper(mailContaint.SpreadsheetId);
+
+              DataTable dt = googleSheetsHelper.ToDataTable(googleSheetsHelper.GetDataFromSheet(gsp));
 
 
-        }
 
+              string searchTerm = Convert.ToString(txtSearch.Text);
+
+              DataView dv = (dgvCandList.DataSource as DataTable).DefaultView;
+
+              // Reset the filter before applying a new one
+              dv.RowFilter = string.Empty;
+
+              if (!string.IsNullOrEmpty(searchTerm))
+              {
+                  // Use "OR" to search in either column
+                  dv.RowFilter = $"Name like '%{searchTerm}%' OR Location like '%{searchTerm}%' OR Skills like '%{searchTerm}%' OR InterviewDateTime like '%{searchTerm}%' OR SchedulersName like '%{searchTerm}%' OR InterViewStatus like '%{searchTerm}%' OR InterViewRound like '%{searchTerm}%' OR InterViewerName like '%{searchTerm}%'";
+              }
+
+
+
+
+
+          }
+  */
 
 
         private void btnSingleOpenFileDialog_Click(object sender, EventArgs e)
@@ -767,7 +780,7 @@ namespace InterViewScheduler
             }
             catch
             {
-               // MessageBox.Show("Invalid cell");
+                // MessageBox.Show("Invalid cell");
             }
 
 
@@ -799,6 +812,16 @@ namespace InterViewScheduler
 
 
         private void dtpInterviewDate_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void toolStripStatusLabel1_Click(object sender, EventArgs e)
+        {
+            DataGridViewAutoFilterColumnHeaderCell.RemoveFilter(dgvCandList);
+        }
+
+        private void cmbRounds_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }

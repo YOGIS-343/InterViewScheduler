@@ -38,7 +38,7 @@ namespace CalendarQuickstart
         public string? InterViewerEmail { get; set; }
 
         //Below properties not mendotory
-        public string GoogleMeetLink { get; set; } = "GoogleMeetLink";
+       
         public string? ZoomUrl { get; set; }
         public string? MeettingId { get; set; }
         public string? PassCode { get; set; }
@@ -49,10 +49,14 @@ namespace CalendarQuickstart
         public string? ColorCode { get; set; } = "1";
         public string? InterViewerColorCode { get; set; } = "1";
 
+        public string GoogleMeetLink { get; set; } = "GoogleMeetLink";
+
         public string? Mode { get; set; }
 
         public string? Details { get; set; }
         public string? Note { get; set; }
+
+        public string? GBody { get; set; }
 
 
 

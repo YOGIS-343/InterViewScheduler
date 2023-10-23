@@ -77,19 +77,20 @@
             groupBox2 = new GroupBox();
             dgvCandList = new DataGridView();
             candidateDetailsBindingSource = new BindingSource(components);
-            txtSearch = new TextBox();
-            btnSearch = new Button();
             openFileDialog1 = new OpenFileDialog();
             menuStrip1 = new MenuStrip();
             AdminToolStripMenuItem = new ToolStripMenuItem();
             addRecToolStripMenuItem = new ToolStripMenuItem();
             addInterToolStripMenuItem = new ToolStripMenuItem();
             contextMenuStrip1 = new ContextMenuStrip(components);
+            statusStrip1 = new StatusStrip();
+            toolStripStatusLabel1 = new ToolStripStatusLabel();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvCandList).BeginInit();
             ((System.ComponentModel.ISupportInitialize)candidateDetailsBindingSource).BeginInit();
             menuStrip1.SuspendLayout();
+            statusStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // groupBox1
@@ -300,6 +301,7 @@
             cmbRounds.Name = "cmbRounds";
             cmbRounds.Size = new Size(219, 28);
             cmbRounds.TabIndex = 8;
+            cmbRounds.SelectedIndexChanged += cmbRounds_SelectedIndexChanged;
             // 
             // label11
             // 
@@ -551,23 +553,6 @@
             // 
             candidateDetailsBindingSource.DataSource = typeof(CalendarQuickstart.CandidateDetails);
             // 
-            // txtSearch
-            // 
-            txtSearch.Location = new Point(849, 372);
-            txtSearch.Name = "txtSearch";
-            txtSearch.Size = new Size(351, 27);
-            txtSearch.TabIndex = 2;
-            // 
-            // btnSearch
-            // 
-            btnSearch.Location = new Point(1207, 371);
-            btnSearch.Name = "btnSearch";
-            btnSearch.Size = new Size(94, 29);
-            btnSearch.TabIndex = 3;
-            btnSearch.Text = "Search";
-            btnSearch.UseVisualStyleBackColor = true;
-            btnSearch.Click += btnSearch_Click;
-            // 
             // openFileDialog1
             // 
             openFileDialog1.FileName = "openFileDialog1";
@@ -610,13 +595,31 @@
             contextMenuStrip1.Name = "contextMenuStrip1";
             contextMenuStrip1.Size = new Size(61, 4);
             // 
+            // statusStrip1
+            // 
+            statusStrip1.ImageScalingSize = new Size(20, 20);
+            statusStrip1.Items.AddRange(new ToolStripItem[] { toolStripStatusLabel1 });
+            statusStrip1.Location = new Point(0, 714);
+            statusStrip1.Name = "statusStrip1";
+            statusStrip1.Size = new Size(1323, 26);
+            statusStrip1.TabIndex = 5;
+            statusStrip1.Text = "statusStrip1";
+            // 
+            // toolStripStatusLabel1
+            // 
+            toolStripStatusLabel1.IsLink = true;
+            toolStripStatusLabel1.LinkBehavior = LinkBehavior.HoverUnderline;
+            toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            toolStripStatusLabel1.Size = new Size(67, 20);
+            toolStripStatusLabel1.Text = "Show All";
+            toolStripStatusLabel1.Click += toolStripStatusLabel1_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1323, 740);
-            Controls.Add(btnSearch);
-            Controls.Add(txtSearch);
+            Controls.Add(statusStrip1);
             Controls.Add(groupBox2);
             Controls.Add(groupBox1);
             Controls.Add(menuStrip1);
@@ -634,6 +637,8 @@
             ((System.ComponentModel.ISupportInitialize)candidateDetailsBindingSource).EndInit();
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
+            statusStrip1.ResumeLayout(false);
+            statusStrip1.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -679,8 +684,6 @@
         private TextBox txtResumeLink;
         private Label label19;
         private Button btnSave;
-        private TextBox txtSearch;
-        private Button btnSearch;
         private Button btnSingleOpenFileDialog;
         private OpenFileDialog openFileDialog1;
         private ComboBox cmbDuration;
@@ -696,5 +699,7 @@
         private Label label16;
         private DataGridViewTextBoxColumn modeofInterViewDataGridViewTextBoxColumn;
         private BindingSource candidateDetailsBindingSource;
+        private StatusStrip statusStrip1;
+        private ToolStripStatusLabel toolStripStatusLabel1;
     }
 }
