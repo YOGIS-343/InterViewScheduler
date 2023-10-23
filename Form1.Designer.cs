@@ -157,7 +157,6 @@
             // ModeOfInterview
             // 
             ModeOfInterview.FormattingEnabled = true;
-            ModeOfInterview.Items.AddRange(new object[] { "Virtual", "F2F" });
             ModeOfInterview.Location = new Point(225, 295);
             ModeOfInterview.Name = "ModeOfInterview";
             ModeOfInterview.Size = new Size(216, 28);
