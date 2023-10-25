@@ -35,7 +35,7 @@ namespace InterViewScheduler
         private int indexRow;
         private BindingSource bindingSource;
         public string Modeof;
-
+        Form2 frm = new Form2();
 
         CandidateDetails candidateDetails = new CandidateDetails();
 
@@ -43,7 +43,7 @@ namespace InterViewScheduler
 
         private void Form1_Load(object sender, EventArgs e)
         {
-             ModeOfInterview.SelectedIndex = 0;
+            // ModeOfInterview.SelectedIndex = 0;
 
         }
 
@@ -740,7 +740,7 @@ namespace InterViewScheduler
 
         private void addRecToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form2 frm = new Form2();
+            frm.parentLocation = this.Location;
             frm.ShowDialog();
         }
 
@@ -806,11 +806,6 @@ namespace InterViewScheduler
 
         }
 
-
-
-
-
-
         private void dtpInterviewDate_ValueChanged(object sender, EventArgs e)
         {
 
@@ -822,6 +817,11 @@ namespace InterViewScheduler
         }
 
         private void cmbRounds_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void AdminToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
         }

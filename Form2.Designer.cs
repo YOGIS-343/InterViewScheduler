@@ -20,6 +20,8 @@
             base.Dispose(disposing);
         }
 
+    
+
         #region Windows Form Designer generated code
 
         /// <summary>
@@ -198,6 +200,7 @@
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Interview Scheduler - Recruter Details";
             Load += Form2_Load_1;
+            LocationChanged += Form2_LocationChanged;
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
             PerformLayout();

@@ -157,6 +157,7 @@
             // ModeOfInterview
             // 
             ModeOfInterview.FormattingEnabled = true;
+            ModeOfInterview.Items.AddRange(new object[] { "Virtual", "F2F" });
             ModeOfInterview.Location = new Point(225, 295);
             ModeOfInterview.Name = "ModeOfInterview";
             ModeOfInterview.Size = new Size(216, 28);
@@ -573,6 +574,7 @@
             AdminToolStripMenuItem.Name = "AdminToolStripMenuItem";
             AdminToolStripMenuItem.Size = new Size(106, 24);
             AdminToolStripMenuItem.Text = "Admin Panel";
+            AdminToolStripMenuItem.Click += AdminToolStripMenuItem_Click;
             // 
             // addRecToolStripMenuItem
             // 
@@ -618,12 +620,13 @@
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1323, 740);
+            Controls.Add(groupBox1);
             Controls.Add(statusStrip1);
             Controls.Add(groupBox2);
-            Controls.Add(groupBox1);
             Controls.Add(menuStrip1);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Icon = (Icon)resources.GetObject("$this.Icon");
+            IsMdiContainer = true;
             MainMenuStrip = menuStrip1;
             Name = "Form1";
             StartPosition = FormStartPosition.CenterScreen;

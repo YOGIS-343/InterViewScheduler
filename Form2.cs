@@ -24,6 +24,7 @@ namespace InterViewScheduler
         private Regex expr;
         public string Filepath;
         public string jsonData;
+        public Point parentLocation;
         private List<Schedulers> schedulers;
         List<Combobox_Item> combobox_Items = new List<Combobox_Item>();
 
@@ -281,6 +282,27 @@ namespace InterViewScheduler
             catch (Exception)
             {
                 throw new ArgumentException("User has not deleted");
+            }
+        }
+
+        private void Form2_LocationChanged(object sender, EventArgs e)
+        {
+            int minX = (this.Location.X - parentLocation.X);
+            int minY = (this.Location.Y - parentLocation.Y);
+           
+           // if (parentLocation.X > this.Location.X)
+            //{
+               // this.Location = new Point(parentLocation.X,this.Location.Y);
+           //}
+
+           // if(parentLocation.Y > this.Location.Y)
+            //{
+                //this.Location = new Point(this.Location.X, this.parentLocation.Y);
+            //}
+            
+            if(minX <0 || minY < 0)
+            {
+                this.Location = this.parentLocation;
             }
         }
     }
