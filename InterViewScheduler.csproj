@@ -19,7 +19,9 @@
     <PackageReference Include="DataGridView-AutoFilter" Version="1.1.0" />
     <PackageReference Include="Google.Apis.Calendar.v3" Version="1.62.0.3171" />
     <PackageReference Include="Google.Apis.Drive.v3" Version="1.62.0.3155" />
+    <PackageReference Include="Google.Apis.Gmail.v1" Version="1.62.1.3196" />
     <PackageReference Include="Google.Apis.Sheets.v4" Version="1.62.0.3148" />
+    <PackageReference Include="MimeKit" Version="4.2.0" />
     <PackageReference Include="MongoDB.Bson" Version="2.21.0" />
     <PackageReference Include="morelinq" Version="3.4.2" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
