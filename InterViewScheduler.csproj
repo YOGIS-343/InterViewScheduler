@@ -19,11 +19,14 @@
     <PackageReference Include="DataGridView-AutoFilter" Version="1.1.0" />
     <PackageReference Include="Google.Apis.Calendar.v3" Version="1.62.0.3171" />
     <PackageReference Include="Google.Apis.Drive.v3" Version="1.62.0.3155" />
+    <PackageReference Include="Google.Apis.Gmail.v1" Version="1.62.1.3196" />
     <PackageReference Include="Google.Apis.Sheets.v4" Version="1.62.0.3148" />
+    <PackageReference Include="MimeKit" Version="4.2.0" />
     <PackageReference Include="MongoDB.Bson" Version="2.21.0" />
     <PackageReference Include="morelinq" Version="3.4.2" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="NUnit" Version="3.13.3" />
+    <PackageReference Include="Selenium.WebDriver" Version="4.14.1" />
     <PackageReference Include="Syncfusion.Shared.Base" Version="23.1.40" />
     <PackageReference Include="Syncfusion.Xamarin.SfListView" Version="23.1.40" />
   </ItemGroup>
@@ -41,6 +44,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="client_secretold.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="client_secret_Gmail.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Colorcode\Banana.jpg">

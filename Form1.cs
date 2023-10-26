@@ -18,6 +18,26 @@ using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using Event = Google.Apis.Calendar.v3.Data.Event;
 using DataGridViewAutoFilter;
+using Xamarin.Forms;
+using System.Net.Mail;
+using static System.ComponentModel.Design.ObjectSelectorEditor;
+using Google.Apis.Auth.OAuth2;
+using Google.Apis.Services;
+using Google.Apis.Util.Store;
+using Google.Apis.Gmail.v1;
+using Google.Apis.Auth.OAuth2;
+using Google.Apis.Gmail.v1;
+using Google.Apis.Gmail.v1.Data;
+using Google.Apis.Services;
+using Google.Apis.Util.Store;
+using System;
+using System.IO;
+using System.Threading;
+using System.Windows.Forms;
+//using Message = Google.Apis.Gmail.v1.Data.Message;
+using MimeKit;
+using Message = Google.Apis.Gmail.v1.Data.Message;
+using OpenQA.Selenium.Chrome;
 
 namespace InterViewScheduler
 {
@@ -36,6 +56,7 @@ namespace InterViewScheduler
         private BindingSource bindingSource;
         public string Modeof;
         Form2 frm = new Form2();
+
 
         CandidateDetails candidateDetails = new CandidateDetails();
 
@@ -159,7 +180,7 @@ namespace InterViewScheduler
                 candidateDetails.InterviewDateTime = dtpInterviewDate.Text + " " + cmbdtpInterviewTime.Text;//Convert.ToDateTime(dtpInterviewDate.Text + " " + cmbdtpInterviewTime.Text, CultureInfo.InvariantCulture);
                 candidateDetails.InterViewerName = ((InterViewScheduler.Interviewers)cmbInterviewerNames.SelectedItem).Name;
                 candidateDetails.CreatedDate = DateTime.Now.ToShortDateString();
-                candidateDetails.Comment = txtRemark.Text;
+                candidateDetails.Comment = "NA";
                 candidateDetails.ResumeLink = txtResumeLink.Text;
                 candidateDetails.FeedbackLink = txtFeedbackLink.Text;
 
@@ -311,44 +332,91 @@ namespace InterViewScheduler
         {
             try
             {
-                if (e.RowIndex >= 0)
-                {
-                    var dataIndexNo = dgvCandList.Rows[e.RowIndex].Index.ToString();
-                    EditedRowId = Convert.ToInt32(dgvCandList.Rows[e.RowIndex].Cells[0].Value.ToString());
-                    txtCondName.Text = dgvCandList.Rows[e.RowIndex].Cells[1].Value.ToString();
-                    txtCondMobile.Text = dgvCandList.Rows[e.RowIndex].Cells[2].Value.ToString();
-                    txtCandEmail.Text = dgvCandList.Rows[e.RowIndex].Cells[3].Value.ToString();
-                    txtSkills.Text = dgvCandList.Rows[e.RowIndex].Cells[4].Value.ToString();
-                    cmbLocation.SelectedItem = (cmbLocation.DataSource as List<Locations>).First(x => x.Location.Equals(dgvCandList.Rows[e.RowIndex].Cells[5].Value.ToString()));
-                    dtpLWD.Text = Convert.ToDateTime(dgvCandList.Rows[e.RowIndex].Cells[6].Value.ToString(), CultureInfo.InvariantCulture).ToString();
-                    cmbSchedulers.SelectedItem = (cmbSchedulers.DataSource as List<Schedulers>).First(x => x.Name.Equals(dgvCandList.Rows[e.RowIndex].Cells[7].Value.ToString()));
-                    cmbStatus.SelectedItem = (cmbStatus.DataSource as List<FinalStatus>).First(x => x.Status.Equals(dgvCandList.Rows[e.RowIndex].Cells[9].Value.ToString()));
-                    txtRemark.Text = dgvCandList.Rows[e.RowIndex].Cells[10].Value.ToString();
-                    cmbRounds.SelectedItem = (cmbRounds.DataSource as List<Template>).First(x => x.Id.Equals(dgvCandList.Rows[e.RowIndex].Cells[11].Value.ToString()));
-                    DateTime dt = Convert.ToDateTime(dgvCandList.Rows[e.RowIndex].Cells[12].Value.ToString(), CultureInfo.InvariantCulture); ;
-                    String time12 = dt.ToString("h:mm tt", CultureInfo.InvariantCulture);
-                    dtpInterviewDate.Text = Convert.ToDateTime(dgvCandList.Rows[e.RowIndex].Cells[12].Value.ToString().Split(' ')[0].ToString(), CultureInfo.InvariantCulture).ToString();
-                    cmbdtpInterviewTime.Text = time12;
-                    cmbInterviewerNames.SelectedItem = (cmbInterviewerNames.DataSource as List<Interviewers>).First(x => x.Name.Equals(dgvCandList.Rows[e.RowIndex].Cells[13].Value.ToString()));
-                    txtAttendes.Text = dgvCandList.Rows[e.RowIndex].Cells[14].Value.ToString();
-                    txtResumeLink.Text = dgvCandList.Rows[e.RowIndex].Cells[15].Value.ToString();
-                    txtFeedbackLink.Text = dgvCandList.Rows[e.RowIndex].Cells[16].Value.ToString();
-                    cmbDuration.Text = dgvCandList.Rows[e.RowIndex].Cells[17].Value.ToString();
-                    if (dgvCandList.Rows[e.RowIndex].Cells[18].Value.ToString() == "")
-                    {
-                        txtGoogleMeetUrl.Text = "GoogleMeetLink";
-                    }
-                    else
-                    {
-                        txtGoogleMeetUrl.Text = dgvCandList.Rows[e.RowIndex].Cells[18].Value.ToString();
-                    }
+                indexRow = e.RowIndex;
+                DataGridViewRow row = dgvCandList.Rows[indexRow];
 
+                //EditedRowId = row.Cells[0].Value.ToString();
+                txtCondName.Text = row.Cells[1].Value.ToString();
+                txtCondMobile.Text = row.Cells[2].Value.ToString();
+                txtCandEmail.Text = row.Cells[3].Value.ToString();
+                txtSkills.Text = row.Cells[4].Value.ToString();
+                cmbLocation.Text = row.Cells[5].Value.ToString();
+                //dtpLWD.Text = row.Cells[6].Value.ToString();
+                cmbSchedulers.Text = row.Cells[7].Value.ToString();
+
+                cmbStatus.Text = row.Cells[9].Value.ToString();
+                txtRemark.Text = row.Cells[10].Value.ToString();
+                cmbRounds.Text = row.Cells[11].Value.ToString();
+                DateTime dt = Convert.ToDateTime(dgvCandList.Rows[e.RowIndex].Cells[12].Value.ToString(), CultureInfo.InvariantCulture); ;
+                String time12 = dt.ToString("h:mm tt", CultureInfo.InvariantCulture);
+                dtpInterviewDate.Text = Convert.ToDateTime(dgvCandList.Rows[e.RowIndex].Cells[12].Value.ToString().Split(' ')[0].ToString(), CultureInfo.InvariantCulture).ToString();
+                cmbdtpInterviewTime.Text = time12;
+                //dtpInterviewDate.Text = row.Cells[12].Value.ToString();
+                cmbInterviewerNames.Text = row.Cells[13].Value.ToString();
+                txtAttendes.Text = row.Cells[14].Value.ToString();
+                txtResumeLink.Text = row.Cells[15].Value.ToString();
+                txtFeedbackLink.Text = row.Cells[16].Value.ToString();
+                cmbDuration.Text = row.Cells[17].Value.ToString();
+                if (dgvCandList.Rows[e.RowIndex].Cells[18].Value.ToString() == "")
+                {
+                    txtGoogleMeetUrl.Text = "GoogleMeetLink";
+                }
+                else
+                {
+                    txtGoogleMeetUrl.Text = dgvCandList.Rows[e.RowIndex].Cells[18].Value.ToString();
                 }
             }
             catch
             {
-                MessageBox.Show("Select the proper cell");
+                // MessageBox.Show("Invalid cell");
             }
+
+        }
+        private void dgvCandList_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            /* try
+             {
+                 indexRow = e.RowIndex;
+                 DataGridViewRow row = dgvCandList.Rows[indexRow];
+
+                 //EditedRowId = row.Cells[0].Value.ToString();
+                 txtCondName.Text = row.Cells[1].Value.ToString();
+                 txtCondMobile.Text = row.Cells[2].Value.ToString();
+                 txtCandEmail.Text = row.Cells[3].Value.ToString();
+                 txtSkills.Text = row.Cells[4].Value.ToString();
+                 cmbLocation.Text = row.Cells[5].Value.ToString();
+                 //dtpLWD.Text = row.Cells[6].Value.ToString();
+                 cmbSchedulers.Text = row.Cells[7].Value.ToString();
+
+                 cmbStatus.Text = row.Cells[9].Value.ToString();
+                 txtRemark.Text = row.Cells[10].Value.ToString();
+                 cmbRounds.Text = row.Cells[11].Value.ToString();
+                 DateTime dt = Convert.ToDateTime(dgvCandList.Rows[e.RowIndex].Cells[12].Value.ToString(), CultureInfo.InvariantCulture); ;
+                 String time12 = dt.ToString("h:mm tt", CultureInfo.InvariantCulture);
+                 dtpInterviewDate.Text = Convert.ToDateTime(dgvCandList.Rows[e.RowIndex].Cells[12].Value.ToString().Split(' ')[0].ToString(), CultureInfo.InvariantCulture).ToString();
+                 cmbdtpInterviewTime.Text = time12;
+                 //dtpInterviewDate.Text = row.Cells[12].Value.ToString();
+                 cmbInterviewerNames.Text = row.Cells[13].Value.ToString();
+                 txtAttendes.Text = row.Cells[14].Value.ToString();
+                 txtResumeLink.Text = row.Cells[15].Value.ToString();
+                 txtFeedbackLink.Text = row.Cells[16].Value.ToString();
+                 cmbDuration.Text = row.Cells[17].Value.ToString();
+                 if (dgvCandList.Rows[e.RowIndex].Cells[18].Value.ToString() == "")
+                 {
+                     txtGoogleMeetUrl.Text = "GoogleMeetLink";
+                 }
+                 else
+                 {
+                     txtGoogleMeetUrl.Text = dgvCandList.Rows[e.RowIndex].Cells[18].Value.ToString();
+                 }
+             }
+             catch
+             {
+                 // MessageBox.Show("Invalid cell");
+             }
+
+ */
+
         }
 
         private void ClearData()
@@ -421,6 +489,7 @@ namespace InterViewScheduler
                 if (candidateDetails.InterViewRound == "1st Round Interview")
                 {
                     candidateDetails.Summary = "Invitation for the first round interview with WonderBiz for the " + candidateDetails.Skills;
+
                 }
                 else
                 {
@@ -750,42 +819,7 @@ namespace InterViewScheduler
             interviewerAdd.ShowDialog();
         }
 
-        private void dgvCandList_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            try
-            {
-                indexRow = e.RowIndex;
-                DataGridViewRow row = dgvCandList.Rows[indexRow];
 
-                //EditedRowId = row.Cells[0].Value.ToString();
-                txtCondName.Text = row.Cells[1].Value.ToString();
-                txtCondMobile.Text = row.Cells[2].Value.ToString();
-                txtCandEmail.Text = row.Cells[3].Value.ToString();
-                txtSkills.Text = row.Cells[4].Value.ToString();
-                cmbLocation.Text = row.Cells[5].Value.ToString();
-                //dtpLWD.Text = row.Cells[6].Value.ToString();
-                cmbSchedulers.Text = row.Cells[7].Value.ToString();
-
-                cmbStatus.Text = row.Cells[9].Value.ToString();
-                txtRemark.Text = row.Cells[10].Value.ToString();
-                cmbRounds.Text = row.Cells[11].Value.ToString();
-                //dtpInterviewDate.Text = row.Cells[12].Value.ToString();
-                cmbInterviewerNames.Text = row.Cells[13].Value.ToString();
-                txtAttendes.Text = row.Cells[14].Value.ToString();
-                txtResumeLink.Text = row.Cells[15].Value.ToString();
-                txtFeedbackLink.Text = row.Cells[16].Value.ToString();
-                cmbDuration.Text = row.Cells[17].Value.ToString();
-                txtGoogleMeetUrl.Text = row.Cells[18].Value.ToString();
-
-            }
-            catch
-            {
-                // MessageBox.Show("Invalid cell");
-            }
-
-
-
-        }
 
         private void btn_Delete_Click(object sender, EventArgs e)
         {
@@ -818,12 +852,262 @@ namespace InterViewScheduler
 
         private void cmbRounds_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (cmbRounds.GetItemText(cmbRounds.SelectedItem) == "1st Round Interview")
+            {
+
+                txtFeedbackLink.Text = "https://docs.google.com/spreadsheets/d/12GGzryOCG8nC3ErF1zG5G2tlZuCj7cHBOlpmVP1XJts/edit?usp=sharing";
+
+            }
+            else
+            {
+                txtFeedbackLink.Text = "";
+            }
 
         }
 
         private void AdminToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void dgvCandList_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void dgvCandList_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == System.Windows.Forms.MouseButtons.Right)
+            {
+                contextMenu.Show(Cursor.Position.X, Cursor.Position.Y);
+            }
+        }
+
+
+
+
+        private void dgvCandList_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                try
+                {
+                    dgvCandList.CurrentCell = dgvCandList.Rows[e.RowIndex].Cells[e.ColumnIndex];
+                    // Can leave these here - doesn't hurt
+                    dgvCandList.Rows[e.RowIndex].Selected = true;
+                    dgvCandList.Focus();
+
+                    //selectedBiodataId = Convert.ToInt32(dgrdResults.Rows[e.RowIndex].Cells[1].Value);
+                }
+                catch (Exception)
+                {
+
+                }
+            }
+        }
+
+        private void contextMenuStrip2_Opening(object sender, CancelEventArgs e)
+        {
+
+        }
+        private string Base64UrlEncode(byte[] input)
+        {
+            return Convert.ToBase64String(input)
+                .Replace('+', '-')
+                .Replace('/', '_')
+                .TrimEnd('=');
+        }
+        private void selectedToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+
+                UserCredential credential;
+
+                using (var stream = new FileStream("client_secret_Gmail.json", FileMode.Open, FileAccess.Read))
+                {
+                    string credPath = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+                    credPath = Path.Combine(credPath, ".credentials/gmail-dotnet-quickstart.json");
+
+                    credential = GoogleWebAuthorizationBroker.AuthorizeAsync(
+                        GoogleClientSecrets.Load(stream).Secrets,
+                        new[] { GmailService.Scope.GmailSend },
+                        "user",
+                        CancellationToken.None,
+                        new FileDataStore(credPath, true)).Result;
+                }
+
+                var gmailService = new GmailService(new BaseClientService.Initializer()
+                {
+                    HttpClientInitializer = credential,
+                    ApplicationName = "Your Application Name",
+                });
+                DataGridViewRow row = dgvCandList.Rows[indexRow];
+                if (dgvCandList.SelectedRows.Count == 1)
+                {
+                    DataGridViewRow selectedRow = dgvCandList.SelectedRows[0];
+
+                    // Get candidate's email and selection status
+                    string candidateName = row.Cells[1].Value.ToString();
+                    string candidateEmail = row.Cells[3].Value.ToString();
+                    string candidateSkill = row.Cells[4].Value.ToString();
+                    string candidateLocation = row.Cells[5].Value.ToString();
+
+                    var emailMessage = new MimeMessage();
+                    emailMessage.From.Add(new MailboxAddress("Wonderbiz", "suhas.chougule@wonderbiz.in"));
+                    emailMessage.To.Add(new MailboxAddress(candidateName, candidateEmail));
+                    emailMessage.Subject = "Feedback - " + candidateSkill + "  -  " + candidateLocation;
+                    emailMessage.Body = new TextPart("plain")
+                    {
+                        Text = $"Dear {candidateName},\r\n\r\nWe are thrilled to inform you that you have been selected for the position of .Net SSE at WonderBiz Technology Your skills and experience stood out, and we believe you'll make a valuable addition to our team.\r\n\r\nWill connect you further for the further process.\r\n\r\nVisit Us: www.wonderbiz.co.in\r\nLinkedIn: https://www.linkedin.com/company/wonderbiz-technologies\r\nAlso if you can give a Quick Feedback: https://forms.gle/yWBknaVtbsLy1n9b8"
+                    };
+
+                    using (var stream = new MemoryStream())
+                    {
+                        emailMessage.WriteTo(stream);
+                        var rawMessage = Base64UrlEncode(stream.ToArray());
+
+                        var message = new Message
+                        {
+                            Raw = rawMessage
+                        };
+
+                        // Send the email using the Gmail API
+                        gmailService.Users.Messages.Send(message, "me").Execute();
+                    }
+
+                    MessageBox.Show("Email sent to " + candidateEmail);
+
+                    /*  private string Base64UrlEncode(byte[] input)
+                      {
+                          return Convert.ToBase64String(input)
+                              .Replace('+', '-')
+                              .Replace('/', '_')
+                              .TrimEnd('=');
+                      } */
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Failed to send email: " + ex.Message);
+            }
+
+        }
+
+        private void rejectedToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                UserCredential credential;
+
+                using (var stream = new FileStream("client_secret_Gmail.json", FileMode.Open, FileAccess.Read))
+                {
+                    string credPath = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+                    credPath = Path.Combine(credPath, ".credentials/gmail-dotnet-quickstart.json");
+
+                    credential = GoogleWebAuthorizationBroker.AuthorizeAsync(
+                        GoogleClientSecrets.Load(stream).Secrets,
+                        new[] { GmailService.Scope.GmailSend },
+                        "user",
+                        CancellationToken.None,
+                        new FileDataStore(credPath, true)).Result;
+                }
+
+                var gmailService = new GmailService(new BaseClientService.Initializer()
+                {
+                    HttpClientInitializer = credential,
+                    ApplicationName = "Your Application Name",
+                });
+                DataGridViewRow row = dgvCandList.Rows[indexRow];
+                if (dgvCandList.SelectedRows.Count == 1)
+                {
+                    DataGridViewRow selectedRow = dgvCandList.SelectedRows[0];
+
+                    // Get candidate's email and selection status
+                    string candidateName = row.Cells[1].Value.ToString();
+                    string candidateEmail = row.Cells[3].Value.ToString();
+                    string candidateSkill = row.Cells[4].Value.ToString();
+                    string candidateLocation = row.Cells[5].Value.ToString();
+
+                    var emailMessage = new MimeMessage();
+                    emailMessage.From.Add(new MailboxAddress("Wonderbiz", "suhas.chougule@wonderbiz.in"));
+                    emailMessage.To.Add(new MailboxAddress(candidateName, candidateEmail));
+                    emailMessage.Subject = "Feedback - " + candidateSkill + "  -  " + candidateLocation;
+                    emailMessage.Body = new TextPart("plain")
+                    {
+                        Text = $"Dear {candidateName},\r\n\r\nThank you for taking the time to show an interest in the WonderBiz - {candidateSkill} role. It was a pleasure to learn more about your skills and accomplishments.\r\n\r\nUnfortunately, you were not selected to return for additional interviews.\r\nThank you for interviewing with our team.\r\n\r\nI would like to note that often due to high competition for jobs it’s difficult to make choices between many high-caliber candidates. Now that we’ve had the chance to know more about you, we will be keeping your resume for relevant future openings.\r\n\r\nWe wish you success with your current job search. We appreciate your interest in our company.\r\n\r\nVisit Us: www.wonderbiz.co.in\r\nLinkedIn: https://www.linkedin.com/company/wonderbiz-technologies\r\nAlso if you can give a Quick Feedback: https://forms.gle/yWBknaVtbsLy1n9b8"
+                    };
+
+                    using (var stream = new MemoryStream())
+                    {
+                        emailMessage.WriteTo(stream);
+                        var rawMessage = Base64UrlEncode(stream.ToArray());
+
+                        var message = new Message
+                        {
+                            Raw = rawMessage
+                        };
+
+                        // Send the email using the Gmail API
+                        gmailService.Users.Messages.Send(message, "me").Execute();
+                    }
+
+                    MessageBox.Show("Email sent to " + candidateEmail);
+
+                }
+            }
+
+            catch (Exception ex)
+            {
+                MessageBox.Show("Failed to send email: " + ex.Message);
+            }
+        }
+
+        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
+        }
+        private void OpenGoogleDocsLink(string link)
+        {
+            try
+            {
+                // Optional: Disable browser notifications
+                var chromeOptions = new ChromeOptions();
+                chromeOptions.AddArguments("--incognito");
+                using (var driver = new ChromeDriver(chromeOptions))
+                {
+                    driver.Navigate().GoToUrl(link);
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message);
+            }
+        }
+        private void dgvCandList_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if ((e.ColumnIndex == 15 || e.ColumnIndex == 16 )&& e.RowIndex >= 0)
+                {
+                    string link = dgvCandList[e.ColumnIndex, e.RowIndex].Value.ToString();
+
+                    if (Uri.IsWellFormedUriString(link, UriKind.Absolute))
+                    {
+                        if (link.Contains("https://docs.google.com/document/"))
+                        {
+                            OpenGoogleDocsLink(link);
+                        }
+                        else
+                        {
+                            System.Diagnostics.Process.Start("explorer", link);
+                        }
+                    }
+                    else
+                    {
+                        // Handle non-URL data as needed
+                        MessageBox.Show("This is not a valid URL: " + link);
+                    }
+                }
         }
     }
 }

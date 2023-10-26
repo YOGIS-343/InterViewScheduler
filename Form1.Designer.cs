@@ -76,18 +76,21 @@
             label1 = new Label();
             groupBox2 = new GroupBox();
             dgvCandList = new DataGridView();
+            contextMenu = new ContextMenuStrip(components);
+            selectedToolStripMenuItem = new ToolStripMenuItem();
+            rejectedToolStripMenuItem = new ToolStripMenuItem();
             candidateDetailsBindingSource = new BindingSource(components);
             openFileDialog1 = new OpenFileDialog();
             menuStrip1 = new MenuStrip();
             AdminToolStripMenuItem = new ToolStripMenuItem();
             addRecToolStripMenuItem = new ToolStripMenuItem();
             addInterToolStripMenuItem = new ToolStripMenuItem();
-            contextMenuStrip1 = new ContextMenuStrip(components);
             statusStrip1 = new StatusStrip();
             toolStripStatusLabel1 = new ToolStripStatusLabel();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvCandList).BeginInit();
+            contextMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)candidateDetailsBindingSource).BeginInit();
             menuStrip1.SuspendLayout();
             statusStrip1.SuspendLayout();
@@ -536,6 +539,7 @@
             // dgvCandList
             // 
             dgvCandList.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvCandList.ContextMenuStrip = contextMenu;
             dgvCandList.Dock = DockStyle.Fill;
             dgvCandList.EditMode = DataGridViewEditMode.EditProgrammatically;
             dgvCandList.GridColor = SystemColors.ActiveCaption;
@@ -547,7 +551,33 @@
             dgvCandList.Size = new Size(1301, 282);
             dgvCandList.TabIndex = 0;
             dgvCandList.CellClick += dgvCandList_CellClick;
+            dgvCandList.CellContentClick += dgvCandList_CellContentClick;
+            dgvCandList.CellContentDoubleClick += dgvCandList_CellContentDoubleClick;
             dgvCandList.CellDoubleClick += dgvCandList_CellDoubleClick;
+            dgvCandList.CellMouseDown += dgvCandList_CellMouseDown;
+            dgvCandList.MouseClick += dgvCandList_MouseClick;
+            // 
+            // contextMenu
+            // 
+            contextMenu.ImageScalingSize = new Size(20, 20);
+            contextMenu.Items.AddRange(new ToolStripItem[] { selectedToolStripMenuItem, rejectedToolStripMenuItem });
+            contextMenu.Name = "contextMenuStrip2";
+            contextMenu.Size = new Size(137, 52);
+            contextMenu.Opening += contextMenuStrip2_Opening;
+            // 
+            // selectedToolStripMenuItem
+            // 
+            selectedToolStripMenuItem.Name = "selectedToolStripMenuItem";
+            selectedToolStripMenuItem.Size = new Size(136, 24);
+            selectedToolStripMenuItem.Text = "Selected";
+            selectedToolStripMenuItem.Click += selectedToolStripMenuItem_Click;
+            // 
+            // rejectedToolStripMenuItem
+            // 
+            rejectedToolStripMenuItem.Name = "rejectedToolStripMenuItem";
+            rejectedToolStripMenuItem.Size = new Size(136, 24);
+            rejectedToolStripMenuItem.Text = "Rejected";
+            rejectedToolStripMenuItem.Click += rejectedToolStripMenuItem_Click;
             // 
             // candidateDetailsBindingSource
             // 
@@ -567,6 +597,7 @@
             menuStrip1.Size = new Size(1323, 30);
             menuStrip1.TabIndex = 4;
             menuStrip1.Text = "menuStrip1";
+            menuStrip1.ItemClicked += menuStrip1_ItemClicked;
             // 
             // AdminToolStripMenuItem
             // 
@@ -589,12 +620,6 @@
             addInterToolStripMenuItem.Size = new Size(223, 26);
             addInterToolStripMenuItem.Text = "Manage Interviewer";
             addInterToolStripMenuItem.Click += addInterToolStripMenuItem_Click;
-            // 
-            // contextMenuStrip1
-            // 
-            contextMenuStrip1.ImageScalingSize = new Size(20, 20);
-            contextMenuStrip1.Name = "contextMenuStrip1";
-            contextMenuStrip1.Size = new Size(61, 4);
             // 
             // statusStrip1
             // 
@@ -636,6 +661,7 @@
             groupBox1.PerformLayout();
             groupBox2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dgvCandList).EndInit();
+            contextMenu.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)candidateDetailsBindingSource).EndInit();
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
@@ -675,8 +701,6 @@
         private Label label11;
         private ComboBox cmbdtpInterviewTime;
         private DateTimePicker dtpInterviewDate;
-        private Label label13;
-        private TextBox txtRemark;
         private ComboBox cmbRounds;
         private Label label14;
         private TextBox txtAttendes;
@@ -695,7 +719,6 @@
         private ToolStripMenuItem addRecToolStripMenuItem;
         private ToolStripMenuItem addInterToolStripMenuItem;
         public ToolStripMenuItem AdminToolStripMenuItem;
-        private ContextMenuStrip contextMenuStrip1;
         public Button btn_delete;
         private ComboBox ModeOfInterview;
         private Label label16;
@@ -703,5 +726,10 @@
         private BindingSource candidateDetailsBindingSource;
         private StatusStrip statusStrip1;
         private ToolStripStatusLabel toolStripStatusLabel1;
+        private ToolStripMenuItem selectedToolStripMenuItem;
+        private ToolStripMenuItem rejectedToolStripMenuItem;
+        public ContextMenuStrip contextMenu;
+        private Label label13;
+        private TextBox txtRemark;
     }
 }

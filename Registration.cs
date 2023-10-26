@@ -19,7 +19,7 @@ namespace InterViewScheduler
         }
         private void BtnRegister_Click(object sender, EventArgs e)
         {
-            string username = RegUsernameText.Text.ToString();
+            string username = RegUsernameText.Text.ToLower();
             string password = RegPassText.Text;
 
 
