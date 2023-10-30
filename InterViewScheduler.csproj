@@ -26,6 +26,7 @@
     <PackageReference Include="morelinq" Version="3.4.2" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="NUnit" Version="3.13.3" />
+    <PackageReference Include="Selenium.WebDriver" Version="4.14.1" />
     <PackageReference Include="Syncfusion.Shared.Base" Version="23.1.40" />
     <PackageReference Include="Syncfusion.Xamarin.SfListView" Version="23.1.40" />
   </ItemGroup>
@@ -43,6 +44,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="client_secretold.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="client_secret_Gmail.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Colorcode\Banana.jpg">

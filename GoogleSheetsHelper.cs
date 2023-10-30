@@ -9,6 +9,8 @@ using System.Linq;
 using System.Dynamic;
 using System.Data;
 using CalendarQuickstart;
+using Newtonsoft.Json.Linq;
+using System.Windows.Forms;
 
 namespace InterViewScheduler
 {
@@ -57,9 +59,9 @@ namespace InterViewScheduler
 
         public DataTable ToDataTable(IEnumerable<dynamic> items)
         {
-            var data = items.ToArray();
-            if (data.Count() == 0) return null;
 
+            var Data = items.ToArray();
+            var data = Data.Reverse().ToArray();
             var dt = new DataTable();
             foreach (var key in ((IDictionary<string, object>)data[0]).Keys)
             {

@@ -61,8 +61,8 @@ namespace InterViewScheduler
                     {
 
                         Form1 frm = new Form1();
-                        frm.ShowDialog();
                         this.Hide();
+                        frm.ShowDialog();
                         Close();
                     }
                     else
@@ -89,6 +89,8 @@ namespace InterViewScheduler
 
             if (user != null)
             {
+                textBox1.Text = "";
+                textBox2.Text = "";
                 Registration frm = new Registration();
                 frm.ShowDialog();
             }
@@ -110,7 +112,6 @@ namespace InterViewScheduler
             else
             {
                 textBox2.UseSystemPasswordChar = true;
-
 
             }
         }

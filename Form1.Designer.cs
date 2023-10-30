@@ -165,6 +165,8 @@
             ModeOfInterview.Name = "ModeOfInterview";
             ModeOfInterview.Size = new Size(216, 28);
             ModeOfInterview.TabIndex = 49;
+            ModeOfInterview.SelectedIndexChanged += ModeOfInterview_SelectedIndexChanged;
+            ModeOfInterview.SelectedIndex = 0;
             // 
             // btn_delete
             // 
@@ -554,6 +556,7 @@
             dgvCandList.TabIndex = 0;
             dgvCandList.CellClick += dgvCandList_CellClick;
             dgvCandList.CellContentClick += dgvCandList_CellContentClick;
+            dgvCandList.CellContentDoubleClick += dgvCandList_CellContentDoubleClick;
             dgvCandList.CellDoubleClick += dgvCandList_CellDoubleClick;
             dgvCandList.CellMouseDown += dgvCandList_CellMouseDown;
             dgvCandList.MouseClick += dgvCandList_MouseClick;
@@ -702,8 +705,6 @@
         private Label label11;
         private ComboBox cmbdtpInterviewTime;
         private DateTimePicker dtpInterviewDate;
-        private Label label13;
-        private TextBox txtRemark;
         private ComboBox cmbRounds;
         private Label label14;
         private TextBox txtAttendes;
@@ -732,5 +733,7 @@
         private ToolStripMenuItem selectedToolStripMenuItem;
         private ToolStripMenuItem rejectedToolStripMenuItem;
         public ContextMenuStrip contextMenu;
+        private Label label13;
+        private TextBox txtRemark;
     }
 }
