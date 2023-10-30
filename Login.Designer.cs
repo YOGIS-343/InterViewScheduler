@@ -138,6 +138,7 @@
             comboBox1.Size = new Size(328, 28);
             comboBox1.TabIndex = 19;
             comboBox1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
+            comboBox1.SelectedIndex = 0;
             // 
             // Login
             // 

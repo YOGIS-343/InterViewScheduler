@@ -165,6 +165,8 @@
             ModeOfInterview.Name = "ModeOfInterview";
             ModeOfInterview.Size = new Size(216, 28);
             ModeOfInterview.TabIndex = 49;
+            ModeOfInterview.SelectedIndexChanged += ModeOfInterview_SelectedIndexChanged;
+            ModeOfInterview.SelectedIndex = 0;
             // 
             // btn_delete
             // 

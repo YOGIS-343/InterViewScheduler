@@ -113,7 +113,6 @@ namespace InterViewScheduler
             {
                 textBox2.UseSystemPasswordChar = true;
 
-
             }
         }
 

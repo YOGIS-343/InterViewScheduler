@@ -1067,47 +1067,52 @@ namespace InterViewScheduler
         {
 
         }
-        private void OpenGoogleDocsLink(string link)
+        private void OpenGoogleDriveLink(string link)
         {
             try
             {
-                // Optional: Disable browser notifications
-                var chromeOptions = new ChromeOptions();
-                chromeOptions.AddArguments("--incognito");
-                using (var driver = new ChromeDriver(chromeOptions))
-                {
-                    driver.Navigate().GoToUrl(link);
-                }
+                // Replace "/view" with "/preview" to get a direct link to the file
+               // link = link.Replace("/view", "/preview");
+
+                System.Diagnostics.Process.Start("explorer", link);
             }
             catch (Exception ex)
             {
-
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("Error opening the URL: " + ex.Message);
             }
         }
+
+
         private void dgvCandList_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if ((e.ColumnIndex == 15 || e.ColumnIndex == 16 )&& e.RowIndex >= 0)
+            if ((e.ColumnIndex == 15 || e.ColumnIndex == 16) && e.RowIndex >= 0)
+            {
+                string link = dgvCandList[e.ColumnIndex, e.RowIndex].Value.ToString();
+                if (Uri.IsWellFormedUriString(link, UriKind.Absolute))
                 {
-                    string link = dgvCandList[e.ColumnIndex, e.RowIndex].Value.ToString();
-
-                    if (Uri.IsWellFormedUriString(link, UriKind.Absolute))
+                    if (link.Contains("https://drive.google.com/"))
                     {
-                        if (link.Contains("https://docs.google.com/document/"))
-                        {
-                            OpenGoogleDocsLink(link);
-                        }
-                        else
-                        {
-                            System.Diagnostics.Process.Start("explorer", link);
-                        }
+                        OpenGoogleDriveLink(link);
                     }
                     else
                     {
-                        // Handle non-URL data as needed
-                        MessageBox.Show("This is not a valid URL: " + link);
+                        System.Diagnostics.Process.Start("explorer", link);
                     }
                 }
+                else
+                {
+                    // Handle non-URL data as needed
+                    MessageBox.Show("This is not a valid URL: " + link);
+                }
+            }
+        }
+
+       
+
+
+        private void ModeOfInterview_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
