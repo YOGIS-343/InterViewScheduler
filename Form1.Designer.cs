@@ -346,6 +346,7 @@
             dtpLWD.Name = "dtpLWD";
             dtpLWD.Size = new Size(121, 27);
             dtpLWD.TabIndex = 7;
+            dtpLWD.Visible = false;
             // 
             // btnDrop
             // 
@@ -454,6 +455,7 @@
             label6.Size = new Size(147, 20);
             label6.TabIndex = 10;
             label6.Text = "Last Working Date :- ";
+            label6.Visible = false;
             // 
             // label5
             // 
